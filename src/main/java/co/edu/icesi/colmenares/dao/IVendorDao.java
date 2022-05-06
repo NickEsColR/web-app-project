@@ -11,4 +11,5 @@ public interface IVendorDao {
 	public void delete(Vendor entity);
 	public Vendor findById(int id);
 	public List<Vendor> findAll();
+	public List<Vendor> findByCreditRating(int cr);
 }

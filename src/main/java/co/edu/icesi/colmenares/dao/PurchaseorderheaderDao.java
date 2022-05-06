@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
 import co.edu.icesi.colmenares.model.prchasing.Purchaseorderheader;
+import co.edu.icesi.colmenares.model.prchasing.Shipmethod;
+import co.edu.icesi.colmenares.model.prchasing.Vendor;
 
 @Repository
 @Scope("singleton")
@@ -45,6 +47,20 @@ public class PurchaseorderheaderDao implements IPurchaseorderheaderDao {
 	public List<Purchaseorderheader> findAll() {
 		// TODO Auto-generated method stub
 		return entityManager.createQuery("select p from Purchaseorderheader p").getResultList();
+	}
+
+	@Override
+	public List<Purchaseorderheader> findByShipmethod(Shipmethod s) {
+		// TODO Auto-generated method stub
+		String sql ="select p from Purchaseorderheader p where shipmethod="+s.getShipmethodid();
+		return entityManager.createQuery(sql).getResultList();
+	}
+
+	@Override
+	public List<Purchaseorderheader> findByVendor(Vendor v) {
+		// TODO Auto-generated method stub
+		String sql = "select p from Purchaseorderheader p where vendor="+v.getVendorid();
+		return entityManager.createQuery(sql).getResultList();
 	}
 
 }

@@ -3,6 +3,8 @@ package co.edu.icesi.colmenares.dao;
 import java.util.List;
 
 import co.edu.icesi.colmenares.model.prchasing.Purchaseorderheader;
+import co.edu.icesi.colmenares.model.prchasing.Shipmethod;
+import co.edu.icesi.colmenares.model.prchasing.Vendor;
 
 public interface IPurchaseorderheaderDao {
 	
@@ -11,4 +13,6 @@ public interface IPurchaseorderheaderDao {
 	public void delete(Purchaseorderheader entity);
 	public Purchaseorderheader findById(int id);
 	public List<Purchaseorderheader> findAll();
+	public List<Purchaseorderheader> findByShipmethod(Shipmethod s);
+	public List<Purchaseorderheader> findByVendor(Vendor v);
 }

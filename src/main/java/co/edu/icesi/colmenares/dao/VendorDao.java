@@ -47,4 +47,11 @@ public class VendorDao implements IVendorDao {
 		return entityManager.createQuery("select v from Vendor v").getResultList();
 	}
 
+	@Override
+	public List<Vendor> findByCreditRating(int cr) {
+		// TODO Auto-generated method stub
+		String sql = "select v from Vendor v where creditrating="+cr;
+		return entityManager.createQuery(sql).getResultList();
+	}
+
 }
