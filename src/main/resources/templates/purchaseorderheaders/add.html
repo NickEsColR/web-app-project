@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>Add Purchase order header</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+	integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+	crossorigin="anonymous">
+</head>
+<body>
+	<div class="container my-5">
+		<h2 class="mb-5">New Purchase order header</h2>
+		<div class="row">
+			<div class="col-md-6">
+				<form action="#" th:action="@{/purchaseorderheaders/add}"
+					th:object="${purchaseorderheader}" method="post">
+					<div class="row">
+						<div class="form-group col-md-6">
+							<label for="subtotal" class="col-form-label">Sub total</label> <input
+								type="number" th:field="*{subtotal}" class="form-control"
+								id="subtotal" placeholder="subtotal"> <span
+								th:if="${#fields.hasErrors('subtotal')}" th:errors="*{subtotal}"
+								class="text-danger"></span><br> <label for="orderdate"
+								class="col-form-label">Order date</label> <input type="date"
+								th:field="*{orderdate}" class="form-control" id="orderdate"
+								placeholder="orderdate" value="0"> <span
+								th:if="${#fields.hasErrors('orderdate')}"
+								th:errors="*{orderdate}" class="text-danger"></span>
+						</div>
+						<div class="form-group col-md-6">
+							<label for="employeeid" class="col-form-label">Employee
+								</label> <select th:field="*{employeeid}">
+								<option th:each="e : ${employees}"
+									th:value="${e.businessentityid}" class="form-control"
+									th:text="${e.businessentityid}"
+									th:selected="${purchaseorderheader.employeeid=e.businessentityid}"></option>
+							</select> <span th:if="${#fields.hasErrors('employeeid')}"
+								th:errors="*{employeeid}" class="text-danger"></span> <label
+								for="personid" class="col-form-label">Person
+								</label> <select th:field="*{personid}">
+								<option th:each="p : ${people}"
+									th:value="${p.businessentityid}" class="form-control"
+									th:text="${p.businessentityid}"
+									th:selected="${purchaseorderheader.personid=p.businessentityid}"></option>
+							</select> <span th:if="${#fields.hasErrors('personid')}"
+								th:errors="*{personid}" class="text-danger"></span>
+						</div>
+
+					</div>
+					<div class="row">
+						<div class="col-md-6 mt-3">
+							<input type="submit" name="action" class="btn btn-primary"
+								value="Add Purchase order header">
+						</div>
+						<div class="col-md-3 mt-3">
+							<input type="reset" class="btn btn-secondary" value="Clear">
+						</div>
+						<div class="col-md-3 mt-3">
+							<input type="submit" name="action" class="btn btn-secondary"
+								value="Cancel">
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

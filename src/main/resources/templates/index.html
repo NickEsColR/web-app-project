@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>System</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+	integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+	crossorigin="anonymous">
+</head>
+<body>
+	<div th:switch="${apps}" class="container my-5">
+		<div class="row">
+			<div class="col-md-6">
+				<h2 th:case="null">Vendors, ship methods, purchase order headers and details!</h2>
+
+				<p>
+					<a href="/vendors/"><i class="fas fa-user-edit ml-2"></i> Go to
+						Vendors</a>
+				</p>
+				<p>
+					<a href="/shipmethods/"><i class="fas fa-calendar ml-2"></i> Go to
+						Ship methods</a>
+				</p>
+				<p>
+					<a href="/purchaseorderheaders/"><i class="fas fa-calendar ml-2"></i> Go to
+						Purchase order headers</a>
+				</p>
+				<p>
+					<a href="/purchaseorderdetails/"><i class="fas fa-calendar ml-2"></i> Go to
+						Purchase order details</a>
+				</p>
+				<p>
+					<a href="/logout"><i class="fas fa-calendar ml-2"></i> Logout</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
