@@ -1,5 +1,6 @@
 package co.edu.icesi.colmenares.dao;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -45,6 +46,20 @@ public class PurchaseorderdetailDao implements IPurchaseorderdetailDao {
 	public List<Purchaseorderdetail> findAll() {
 		// TODO Auto-generated method stub
 		return entityManager.createQuery("select p from Purchaseorderdetail p").getResultList();
+	}
+
+	@Override
+	public List<Purchaseorderdetail> findByUnitprice(BigDecimal price) {
+		// TODO Auto-generated method stub
+		String sql = "select p from Purchaseorderdetail p where unitprice="+price;
+		return entityManager.createQuery(sql).getResultList();
+	}
+
+	@Override
+	public List<Purchaseorderdetail> findByProduct(int product) {
+		// TODO Auto-generated method stub
+		String sql = "select p from Purchaseorderdetail p where productid="+product;
+		return entityManager.createQuery(sql).getResultList();
 	}
 
 }
