@@ -15,4 +15,8 @@ public interface IPurchaseorderheaderDao {
 	public List<Purchaseorderheader> findAll();
 	public List<Purchaseorderheader> findByShipmethod(Shipmethod s);
 	public List<Purchaseorderheader> findByVendor(Vendor v);
+	//usando jpql
+	public List<Purchaseorderheader> findWithTwoplusPurchaseorderdetails();//2.b
+	//devolver el encabezado y la suma de los unitprice de sus details
+	public List<Purchaseorderheader> findAllWithSumUnitprices();
 }

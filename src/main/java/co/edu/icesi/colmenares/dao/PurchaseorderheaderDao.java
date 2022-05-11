@@ -63,4 +63,16 @@ public class PurchaseorderheaderDao implements IPurchaseorderheaderDao {
 		return entityManager.createQuery(sql).getResultList();
 	}
 
+	@Override
+	public List<Purchaseorderheader> findWithTwoplusPurchaseorderdetails() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Purchaseorderheader> findAllWithSumUnitprices() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
