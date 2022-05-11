@@ -1,5 +1,6 @@
 package co.edu.icesi.colmenares.dao;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -83,7 +84,7 @@ public class PurchaseorderheaderDao implements IPurchaseorderheaderDao {
 
 		query.select(poh).where(cb.gt(cb.count(pod), 2));			
 		
-		return null;
+		return entityManager.createQuery(query).getResultList();
 	}
 
 	@Override
@@ -92,13 +93,12 @@ public class PurchaseorderheaderDao implements IPurchaseorderheaderDao {
 		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 		CriteriaQuery<Purchaseorderheader> query = cb.createQuery(Purchaseorderheader.class);
 		Root<Purchaseorderheader> poh = query.from(Purchaseorderheader.class);
-		Path<Purchaseorderdetail> pod = poh.get("purchaseorderdetails");
-		List<Predicate> predicates = new ArrayList<>();
+		Path<BigDecimal> unitPrice = query.from(Purchaseorderdetail.class).get("unitprice");
+		Path<Purchaseorderheader> pohOfpod = query.from(Purchaseorderdetail.class).get("purchaseorderheader");
 		//select poh, sum(pod.unitprice) where equals(pod.poh,poh)x
-	
-		query.select(poh).where(cb.or(predicates.toArray(new Predicate[predicates.size()])));
+		query.multiselect(poh,cb.sum(unitPrice)).where(cb.equal(poh, pohOfpod));
 		
-		return null;
+		return entityManager.createQuery(query).getResultList();
 	}
 
 }
