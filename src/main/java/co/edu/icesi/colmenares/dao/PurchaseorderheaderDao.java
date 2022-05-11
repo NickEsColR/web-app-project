@@ -1,13 +1,21 @@
 package co.edu.icesi.colmenares.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Path;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import javax.persistence.criteria.Selection;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
+import co.edu.icesi.colmenares.model.prchasing.Purchaseorderdetail;
 import co.edu.icesi.colmenares.model.prchasing.Purchaseorderheader;
 import co.edu.icesi.colmenares.model.prchasing.Shipmethod;
 import co.edu.icesi.colmenares.model.prchasing.Vendor;
@@ -66,12 +74,30 @@ public class PurchaseorderheaderDao implements IPurchaseorderheaderDao {
 	@Override
 	public List<Purchaseorderheader> findWithTwoplusPurchaseorderdetails() {
 		// TODO Auto-generated method stub
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Purchaseorderheader> query = cb.createQuery(Purchaseorderheader.class);
+		Root<Purchaseorderheader> poh = query.from(Purchaseorderheader.class);
+		Path<Purchaseorderdetail> pod = poh.get("purchaseorderdetails");
+//		List<Predicate> predicates = new ArrayList<>();
+		//contar la lista purchaseorderdetails > 2 en where se puede?
+
+		query.select(poh).where(cb.gt(cb.count(pod), 2));			
+		
 		return null;
 	}
 
 	@Override
 	public List<Purchaseorderheader> findAllWithSumUnitprices() {
 		// TODO Auto-generated method stub
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Purchaseorderheader> query = cb.createQuery(Purchaseorderheader.class);
+		Root<Purchaseorderheader> poh = query.from(Purchaseorderheader.class);
+		Path<Purchaseorderdetail> pod = poh.get("purchaseorderdetails");
+		List<Predicate> predicates = new ArrayList<>();
+		//select poh, sum(pod.unitprice) where equals(pod.poh,poh)x
+	
+		query.select(poh).where(cb.or(predicates.toArray(new Predicate[predicates.size()])));
+		
 		return null;
 	}
 
