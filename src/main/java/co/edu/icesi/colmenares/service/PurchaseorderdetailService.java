@@ -6,6 +6,8 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import co.edu.icesi.colmenares.dao.IPurchaseorderdetailDao;
+import co.edu.icesi.colmenares.dao.IPurchaseorderheaderDao;
 import co.edu.icesi.colmenares.model.prchasing.Purchaseorderdetail;
 import co.edu.icesi.colmenares.model.prchasing.Purchaseorderheader;
 import co.edu.icesi.colmenares.repository.IPurchaseorderdetailRepository;
@@ -14,12 +16,12 @@ import co.edu.icesi.colmenares.repository.IPurchaseorderheaderRepository;
 @Service
 public class PurchaseorderdetailService implements IPurchaseorderdetailService {
 	
-	private IPurchaseorderdetailRepository purchaseorderdetailRepository;
-	private IPurchaseorderheaderRepository purchaseorderheaderRepossitory;
+	private IPurchaseorderdetailDao purchaseorderdetailRepository;
+	private IPurchaseorderheaderDao purchaseorderheaderRepossitory;
 	
 	
-	public PurchaseorderdetailService(IPurchaseorderdetailRepository purchaseorderdetailRepository,
-			IPurchaseorderheaderRepository purchaseorderheaderRepossitory) {
+	public PurchaseorderdetailService(IPurchaseorderdetailDao purchaseorderdetailRepository,
+			IPurchaseorderheaderDao purchaseorderheaderRepossitory) {
 		this.purchaseorderdetailRepository = purchaseorderdetailRepository;
 		this.purchaseorderheaderRepossitory = purchaseorderheaderRepossitory;
 	}

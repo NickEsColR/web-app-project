@@ -8,6 +8,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import co.edu.icesi.colmenares.dao.IPurchaseorderheaderDao;
 import co.edu.icesi.colmenares.model.hr.Employee;
 import co.edu.icesi.colmenares.model.person.Person;
 import co.edu.icesi.colmenares.model.prchasing.Purchaseorderheader;
@@ -18,13 +19,13 @@ import co.edu.icesi.colmenares.repository.IPurchaseorderheaderRepository;
 @Service
 public class PurchaseorderheaderService implements IPurchaseorderheaderService {
 	
-	private IPurchaseorderheaderRepository purchaseorderheaderRepository;
+	private IPurchaseorderheaderDao purchaseorderheaderRepository;
 	private IEmployeeRepository employeeRepository;
 	private IPersonRepository personRepository;
 	
 	
 
-	public PurchaseorderheaderService(IPurchaseorderheaderRepository purchaseorderheaderRepository,
+	public PurchaseorderheaderService(IPurchaseorderheaderDao purchaseorderheaderRepository,
 			IEmployeeRepository employeeRepository, IPersonRepository personRepository) {
 		this.purchaseorderheaderRepository = purchaseorderheaderRepository;
 		this.employeeRepository = employeeRepository;

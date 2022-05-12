@@ -6,16 +6,17 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import co.edu.icesi.colmenares.dao.IShipmethodDao;
 import co.edu.icesi.colmenares.model.prchasing.Shipmethod;
 import co.edu.icesi.colmenares.repository.IShipmethodRepository;
 
 @Service
 public class ShipmethodService implements IShipmethodService {
 	
-	private IShipmethodRepository shipmethodRepository;
+	private IShipmethodDao shipmethodRepository;
 	
 	
-	public ShipmethodService(IShipmethodRepository shipmethodRepository) {
+	public ShipmethodService(IShipmethodDao shipmethodRepository) {
 		this.shipmethodRepository = shipmethodRepository;
 	}
 

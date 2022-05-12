@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import co.edu.icesi.colmenares.dao.IVendorDao;
 import co.edu.icesi.colmenares.model.person.Businessentity;
 import co.edu.icesi.colmenares.model.prchasing.Vendor;
 import co.edu.icesi.colmenares.repository.IBusinessentityRepository;
@@ -17,10 +18,10 @@ public class VendorService implements IVendorService {
 	
 
 	private IBusinessentityRepository businessRepository;
-	private IVendorRepository vendorRepository;
+	private IVendorDao vendorRepository;
 	
 	@Autowired
-	public VendorService(IBusinessentityRepository businessRepository, IVendorRepository vendorRepository) {
+	public VendorService(IBusinessentityRepository businessRepository, IVendorDao vendorRepository) {
 		this.businessRepository = businessRepository;
 		this.vendorRepository = vendorRepository;
 	}
