@@ -31,7 +31,7 @@ public class PurchaseorderdetailService implements IPurchaseorderdetailService {
 	@Transactional
 	public void savePurchaseorderdetail(Purchaseorderdetail value) {
 		// TODO Auto-generated method stub
-		Optional<Purchaseorderheader> poh = purchaseorderheaderRepossitory.findById(value.getPurchaseorderheader().getPurchaseorderid());
+		Optional<Purchaseorderheader> poh = Optional.ofNullable(purchaseorderheaderRepossitory.findById(value.getPurchaseorderheader().getPurchaseorderid()));
 		if(value.getOrderqty()<=0 || value.getUnitprice().intValue()<=0 || poh.isEmpty()) {
 			throw new IllegalArgumentException();
 		}
@@ -47,7 +47,7 @@ public class PurchaseorderdetailService implements IPurchaseorderdetailService {
 		if(value<=0) {
 			throw new IllegalArgumentException();
 		}
-		Optional<Purchaseorderdetail> pod = purchaseorderdetailRepository.findById(id);
+		Optional<Purchaseorderdetail> pod = Optional.ofNullable(purchaseorderdetailRepository.findById(id));
 		if(pod.isPresent()) {
 			pod.get().setOrderqty(value);
 		}
@@ -61,7 +61,7 @@ public class PurchaseorderdetailService implements IPurchaseorderdetailService {
 		if(value.intValue() <=0) {
 			throw new IllegalArgumentException();
 		}
-		Optional<Purchaseorderdetail> pod = purchaseorderdetailRepository.findById(id);
+		Optional<Purchaseorderdetail> pod =  Optional.ofNullable(purchaseorderdetailRepository.findById(id));
 		if(pod.isPresent()) {
 			pod.get().setUnitprice(value);
 		}
@@ -72,8 +72,8 @@ public class PurchaseorderdetailService implements IPurchaseorderdetailService {
 	@Transactional
 	public void setPurchaseorderheader(Purchaseorderheader value, java.lang.Integer id) {
 		// TODO Auto-generated method stub
-		Optional<Purchaseorderdetail> pod = purchaseorderdetailRepository.findById(id);
-		Optional<Purchaseorderheader> poh = purchaseorderheaderRepossitory.findById(value.getPurchaseorderid());
+		Optional<Purchaseorderdetail> pod =  Optional.ofNullable(purchaseorderdetailRepository.findById(id));
+		Optional<Purchaseorderheader> poh = Optional.ofNullable(purchaseorderheaderRepossitory.findById(value.getPurchaseorderid()));
 		if(poh.isEmpty()) {
 			throw new IllegalArgumentException();
 		}else if(pod.isPresent()) {
@@ -85,7 +85,7 @@ public class PurchaseorderdetailService implements IPurchaseorderdetailService {
 	@Override
 	public int getOrderqty(java.lang.Integer id) {
 		// TODO Auto-generated method stub
-		Optional<Purchaseorderdetail> pod = purchaseorderdetailRepository.findById(id);
+		Optional<Purchaseorderdetail> pod =  Optional.ofNullable(purchaseorderdetailRepository.findById(id));
 		if(pod.isPresent()) {
 			return pod.get().getOrderqty();
 		}
@@ -96,7 +96,7 @@ public class PurchaseorderdetailService implements IPurchaseorderdetailService {
 	@Override
 	public BigDecimal getUnitprice(java.lang.Integer id) {
 		// TODO Auto-generated method stub
-		Optional<Purchaseorderdetail> pod = purchaseorderdetailRepository.findById(id);
+		Optional<Purchaseorderdetail> pod =  Optional.ofNullable(purchaseorderdetailRepository.findById(id));
 		if(pod.isPresent()) {
 			return pod.get().getUnitprice();
 		}
@@ -107,7 +107,7 @@ public class PurchaseorderdetailService implements IPurchaseorderdetailService {
 	@Override
 	public Purchaseorderheader getPurchaseorderheaderid(java.lang.Integer id) {
 		// TODO Auto-generated method stub
-		Optional<Purchaseorderdetail> pod = purchaseorderdetailRepository.findById(id);
+		Optional<Purchaseorderdetail> pod =  Optional.ofNullable(purchaseorderdetailRepository.findById(id));
 		if(pod.isPresent()) {
 			return pod.get().getPurchaseorderheader();
 		}
@@ -125,7 +125,7 @@ public class PurchaseorderdetailService implements IPurchaseorderdetailService {
 	@Override
 	public Optional<Purchaseorderdetail> findById(Integer id) {
 		// TODO Auto-generated method stub
-		return purchaseorderdetailRepository.findById(id);
+		return  Optional.ofNullable(purchaseorderdetailRepository.findById(id));
 	}
 
 

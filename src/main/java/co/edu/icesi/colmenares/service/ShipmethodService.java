@@ -37,7 +37,7 @@ public class ShipmethodService implements IShipmethodService {
 		if(value.intValue() <= 0) {
 			throw new IllegalArgumentException();
 		}
-		Optional<Shipmethod> s = shipmethodRepository.findById(id);
+		Optional<Shipmethod> s = Optional.ofNullable(shipmethodRepository.findById(id));
 		if(s.isPresent()) {
 			s.get().setShipbase(value);
 		}
@@ -50,7 +50,7 @@ public class ShipmethodService implements IShipmethodService {
 		if(value.intValue() <= 0) {
 			throw new IllegalArgumentException();
 		}
-		Optional<Shipmethod> s = shipmethodRepository.findById(id);
+		Optional<Shipmethod> s =  Optional.ofNullable(shipmethodRepository.findById(id));
 		if(s.isPresent()) {
 			s.get().setShiprate(value);
 		}
@@ -63,7 +63,7 @@ public class ShipmethodService implements IShipmethodService {
 		if(value.length()<4) {
 			throw new IllegalArgumentException();
 		}
-		Optional<Shipmethod> s = shipmethodRepository.findById(id);
+		Optional<Shipmethod> s =  Optional.ofNullable(shipmethodRepository.findById(id));
 		if(s.isPresent()) {
 			s.get().setName(value);
 		}
@@ -72,7 +72,7 @@ public class ShipmethodService implements IShipmethodService {
 	@Override
 	public BigDecimal getShipbase(int id) {
 		// TODO Auto-generated method stub
-		Optional<Shipmethod> s = shipmethodRepository.findById(id);
+		Optional<Shipmethod> s =  Optional.ofNullable(shipmethodRepository.findById(id));
 		if(s.isPresent()) {
 			return s.get().getShipbase();
 		}
@@ -82,7 +82,7 @@ public class ShipmethodService implements IShipmethodService {
 	@Override
 	public BigDecimal getShiprate(int id) {
 		// TODO Auto-generated method stub
-		Optional<Shipmethod> s = shipmethodRepository.findById(id);
+		Optional<Shipmethod> s =  Optional.ofNullable(shipmethodRepository.findById(id));
 		if(s.isPresent()) {
 			return s.get().getShiprate();
 		}
@@ -92,7 +92,7 @@ public class ShipmethodService implements IShipmethodService {
 	@Override
 	public String getName(int id) {
 		// TODO Auto-generated method stub
-		Optional<Shipmethod> s = shipmethodRepository.findById(id);
+		Optional<Shipmethod> s =  Optional.ofNullable(shipmethodRepository.findById(id));
 		if(s.isPresent()) {
 			return s.get().getName();
 		}
@@ -108,7 +108,7 @@ public class ShipmethodService implements IShipmethodService {
 	@Override
 	public Optional<Shipmethod> findById(Integer id) {
 		// TODO Auto-generated method stub
-		return shipmethodRepository.findById(id);
+		return  Optional.ofNullable(shipmethodRepository.findById(id));
 	}
 
 }

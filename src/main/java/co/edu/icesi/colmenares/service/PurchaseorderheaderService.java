@@ -52,7 +52,7 @@ public class PurchaseorderheaderService implements IPurchaseorderheaderService {
 		if(value.intValue()<=0) {
 			throw new IllegalArgumentException();
 		}
-		Optional<Purchaseorderheader> poh = purchaseorderheaderRepository.findById(id);
+		Optional<Purchaseorderheader> poh = Optional.ofNullable(purchaseorderheaderRepository.findById(id));
 		if(poh.isPresent()) {
 			poh.get().setSubtotal(value);
 		}
@@ -64,7 +64,7 @@ public class PurchaseorderheaderService implements IPurchaseorderheaderService {
 		// TODO Auto-generated method stub
 		LocalDate now = LocalDateTime.now().toLocalDate();
 		if(now.equals(value)) {
-			Optional<Purchaseorderheader> poh = purchaseorderheaderRepository.findById(id);
+			Optional<Purchaseorderheader> poh = Optional.ofNullable(purchaseorderheaderRepository.findById(id));
 			if(poh.isPresent()) {
 				poh.get().setOrderdate(value);
 			}
@@ -82,7 +82,7 @@ public class PurchaseorderheaderService implements IPurchaseorderheaderService {
 		if(e.isEmpty()) {
 			throw new IllegalArgumentException();
 		}
-		Optional<Purchaseorderheader> poh = purchaseorderheaderRepository.findById(id);
+		Optional<Purchaseorderheader> poh = Optional.ofNullable(purchaseorderheaderRepository.findById(id));
 		if(poh.isPresent()) {
 			poh.get().setEmployeeid(employeeid);
 		}
@@ -91,7 +91,7 @@ public class PurchaseorderheaderService implements IPurchaseorderheaderService {
 	@Override
 	public BigDecimal getSubtotal(int id) {
 		// TODO Auto-generated method stub
-		Optional<Purchaseorderheader> poh = purchaseorderheaderRepository.findById(id);
+		Optional<Purchaseorderheader> poh = Optional.ofNullable(purchaseorderheaderRepository.findById(id));
 		if(poh.isPresent()) {
 			return poh.get().getSubtotal();
 		}
@@ -101,7 +101,7 @@ public class PurchaseorderheaderService implements IPurchaseorderheaderService {
 	@Override
 	public LocalDate getOrderdate(int id) {
 		// TODO Auto-generated method stub
-		Optional<Purchaseorderheader> poh = purchaseorderheaderRepository.findById(id);
+		Optional<Purchaseorderheader> poh = Optional.ofNullable(purchaseorderheaderRepository.findById(id));
 		if(poh.isPresent()) {
 			return poh.get().getOrderdate();
 		}
@@ -111,7 +111,7 @@ public class PurchaseorderheaderService implements IPurchaseorderheaderService {
 	@Override
 	public int getEmployeeid(int id) {
 		// TODO Auto-generated method stub
-		Optional<Purchaseorderheader> poh = purchaseorderheaderRepository.findById(id);
+		Optional<Purchaseorderheader> poh = Optional.ofNullable(purchaseorderheaderRepository.findById(id));
 		if(poh.isPresent()) {
 			return poh.get().getEmployeeid();
 		}
@@ -125,7 +125,7 @@ public class PurchaseorderheaderService implements IPurchaseorderheaderService {
 		if(p.isEmpty()) {
 			throw new IllegalArgumentException();
 		}
-		Optional<Purchaseorderheader> poh = purchaseorderheaderRepository.findById(id);
+		Optional<Purchaseorderheader> poh = Optional.ofNullable(purchaseorderheaderRepository.findById(id));
 		if(poh.isPresent()) {
 			poh.get().setPersonid(personid);
 		}
@@ -134,7 +134,7 @@ public class PurchaseorderheaderService implements IPurchaseorderheaderService {
 	@Override
 	public int getPersonid(int id) {
 		// TODO Auto-generated method stub
-		Optional<Purchaseorderheader> poh = purchaseorderheaderRepository.findById(id);
+		Optional<Purchaseorderheader> poh = Optional.ofNullable(purchaseorderheaderRepository.findById(id));
 		if(poh.isPresent()) {
 			return poh.get().getPersonid();
 		}
@@ -150,7 +150,7 @@ public class PurchaseorderheaderService implements IPurchaseorderheaderService {
 	@Override
 	public Optional<Purchaseorderheader> findById(int id) {
 		// TODO Auto-generated method stub
-		return purchaseorderheaderRepository.findById(id);
+		return Optional.ofNullable(purchaseorderheaderRepository.findById(id));
 	}
 
 

@@ -44,7 +44,7 @@ public class VendorService implements IVendorService {
 		if(value <= 0) {
 			throw new IllegalArgumentException();
 		}
-		Optional<Vendor> v = vendorRepository.findById(id);
+		Optional<Vendor> v = Optional.ofNullable(vendorRepository.findById(id));
 		if(v.isPresent()) {
 			v.get().setCreditrating(value);
 		}
@@ -54,7 +54,7 @@ public class VendorService implements IVendorService {
 	public void setPurchasingwebserviceurl(String value, int id) {
 		// TODO Auto-generated method stub
 		if(value.startsWith("https")){
-			Optional<Vendor> v = vendorRepository.findById(id);
+			Optional<Vendor> v = Optional.ofNullable(vendorRepository.findById(id));
 			if(v.isPresent()) {
 				v.get().setPurchasingwebserviceurl(value);
 			}
@@ -70,7 +70,7 @@ public class VendorService implements IVendorService {
 		if(value == null) {
 			throw new IllegalArgumentException();
 		}
-		Optional<Vendor> v = vendorRepository.findById(id);
+		Optional<Vendor> v = Optional.ofNullable(vendorRepository.findById(id));
 		if(v.isPresent()) {
 			v.get().setName(value);
 		}
@@ -79,7 +79,7 @@ public class VendorService implements IVendorService {
 	@Transactional
 	public void setBusinessentityId(int value, int id) {
 		// TODO Auto-generated method stub
-		Optional<Vendor> v = vendorRepository.findById(id);
+		Optional<Vendor> v =  Optional.ofNullable(vendorRepository.findById(id));
 		Optional<Businessentity> b = businessRepository.findById(value);
 		if(b.isEmpty()) {
 			throw new IllegalArgumentException();
@@ -90,7 +90,7 @@ public class VendorService implements IVendorService {
 	@Override
 	public Vendor getVendor(int id) {
 		// TODO Auto-generated method stub
-		Optional<Vendor> v = vendorRepository.findById(id);
+		Optional<Vendor> v = Optional.ofNullable(vendorRepository.findById(id));
 		if(v.isPresent()) {
 			return v.get();
 		}
@@ -99,7 +99,7 @@ public class VendorService implements IVendorService {
 	@Override
 	public int getCreditrating(int id) {
 		// TODO Auto-generated method stub
-		Optional<Vendor> v = vendorRepository.findById(id);
+		Optional<Vendor> v = Optional.ofNullable(vendorRepository.findById(id));
 		if(v.isPresent()) {
 			return v.get().getCreditrating();
 		}
@@ -108,7 +108,7 @@ public class VendorService implements IVendorService {
 	@Override
 	public String getPurchasingwebserviceurl(int id) {
 		// TODO Auto-generated method stub
-		Optional<Vendor> v = vendorRepository.findById(id);
+		Optional<Vendor> v = Optional.ofNullable(vendorRepository.findById(id));
 		if(v.isPresent()) {
 			return v.get().getPurchasingwebserviceurl();
 		}
@@ -117,7 +117,7 @@ public class VendorService implements IVendorService {
 	@Override
 	public String getName(int id) {
 		// TODO Auto-generated method stub
-		Optional<Vendor> v = vendorRepository.findById(id);
+		Optional<Vendor> v = Optional.ofNullable(vendorRepository.findById(id));
 		if(v.isPresent()) {
 			return v.get().getName();
 		}
@@ -126,7 +126,7 @@ public class VendorService implements IVendorService {
 	@Override
 	public int getBusinessentityId(int id) {
 		// TODO Auto-generated method stub
-		Optional<Vendor> v = vendorRepository.findById(id);
+		Optional<Vendor> v = Optional.ofNullable(vendorRepository.findById(id));
 		if(v.isPresent()) {
 			return v.get().getBusinessentityid();
 		}
@@ -140,7 +140,7 @@ public class VendorService implements IVendorService {
 	@Override
 	public Optional<Vendor> findById(Integer id) {
 		// TODO Auto-generated method stub
-		return vendorRepository.findById(id);
+		return  Optional.ofNullable(vendorRepository.findById(id));
 	}
 
 	
