@@ -8,6 +8,7 @@ import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import co.edu.icesi.colmenares.Taller2.Taller2Application;
+import co.edu.icesi.colmenares.dao.IVendorDao;
 import co.edu.icesi.colmenares.model.person.Businessentity;
 import co.edu.icesi.colmenares.model.prchasing.Vendor;
 import co.edu.icesi.colmenares.repository.IBusinessentityRepository;
@@ -17,7 +18,7 @@ import co.edu.icesi.colmenares.repository.IVendorRepository;
 class VendorServiceTest {
 
 	IBusinessentityRepository businessRepositorymock = Mockito.mock(IBusinessentityRepository.class);
-	IVendorRepository vendorRepositoryMock = Mockito.mock(IVendorRepository.class);
+	IVendorDao vendorRepositoryMock = Mockito.mock(IVendorDao.class);
 	IVendorService vendorService = new VendorService(businessRepositorymock, vendorRepositoryMock);
 	
 	@BeforeEach
@@ -33,8 +34,8 @@ class VendorServiceTest {
 		Optional<Vendor> v = Optional.of(new Vendor());
 		v.get().setVendorid(1);;
 		Mockito.when(businessRepositorymock.findById(1)).thenReturn(be);
-		Mockito.when(vendorRepositoryMock.findById(1)).thenReturn(v);
-		Mockito.when(vendorRepositoryMock.findById(2)).thenReturn(Optional.of(v2));
+		Mockito.when(vendorRepositoryMock.findById(1)).thenReturn(v.get());
+		Mockito.when(vendorRepositoryMock.findById(2)).thenReturn(v2);
 		Mockito.when(businessRepositorymock.findById(2)).thenReturn(Optional.ofNullable(null));
 	}
 	
@@ -48,10 +49,10 @@ class VendorServiceTest {
 		v2.setBusinessentityid(1);
 		vendorService.saveVendor(v2);
 		assertAll("Case 1", ()-> {
-			assertEquals(1, vendorService.getCreditrating(1));
-			assertEquals("https", vendorService.getPurchasingwebserviceurl(1));
-			assertEquals("prueba", vendorService.getName(1));
-			assertEquals(1, vendorService.getBusinessentityId(1));
+			assertEquals(1, vendorService.getCreditrating(2));
+			assertEquals("https", vendorService.getPurchasingwebserviceurl(2));
+			assertEquals("prueba", vendorService.getName(2));
+			assertEquals(1, vendorService.getBusinessentityId(2));
 		});
 	}
 	

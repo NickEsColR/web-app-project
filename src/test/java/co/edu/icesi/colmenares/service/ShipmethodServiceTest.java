@@ -9,13 +9,14 @@ import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import co.edu.icesi.colmenares.Taller2.Taller2Application;
+import co.edu.icesi.colmenares.dao.IShipmethodDao;
 import co.edu.icesi.colmenares.model.prchasing.Shipmethod;
 import co.edu.icesi.colmenares.repository.IShipmethodRepository;
 
 @SpringBootTest(classes = Taller2Application.class)
 class ShipmethodServiceTest {
 	
-	static IShipmethodRepository shipmethodRepositoryMock = Mockito.mock(IShipmethodRepository.class);
+	static IShipmethodDao shipmethodRepositoryMock = Mockito.mock(IShipmethodDao.class);
 	IShipmethodService shipmethodService = new ShipmethodService(shipmethodRepositoryMock);
 	
 	@BeforeEach
@@ -27,8 +28,8 @@ class ShipmethodServiceTest {
 		s2.setName("four");
 		Optional<Shipmethod> s = Optional.of(new Shipmethod());
 		s.get().setShipmethodid(Integer.valueOf(1));
-		Mockito.when(shipmethodRepositoryMock.findById(1)).thenReturn(s);
-		Mockito.when(shipmethodRepositoryMock.findById(2)).thenReturn(Optional.of(s2));
+		Mockito.when(shipmethodRepositoryMock.findById(1)).thenReturn(s.get());
+		Mockito.when(shipmethodRepositoryMock.findById(2)).thenReturn(s2);
 	}
 
 	@Test

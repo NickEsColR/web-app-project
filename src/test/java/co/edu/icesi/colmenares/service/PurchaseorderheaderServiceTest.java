@@ -12,6 +12,7 @@ import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import co.edu.icesi.colmenares.Taller2.Taller2Application;
+import co.edu.icesi.colmenares.dao.IPurchaseorderheaderDao;
 import co.edu.icesi.colmenares.model.hr.Employee;
 import co.edu.icesi.colmenares.model.person.Person;
 import co.edu.icesi.colmenares.model.prchasing.Purchaseorderheader;
@@ -23,7 +24,7 @@ import co.edu.icesi.colmenares.repository.IPurchaseorderheaderRepository;
 class PurchaseorderheaderServiceTest {
 
 	
-	static IPurchaseorderheaderRepository pohRepositoryMock = Mockito.mock(IPurchaseorderheaderRepository.class);
+	static IPurchaseorderheaderDao pohRepositoryMock = Mockito.mock(IPurchaseorderheaderDao.class);
 	static IEmployeeRepository employeeRepositoryMock = Mockito.mock(IEmployeeRepository.class);
 	static IPersonRepository personRepositoryMock = Mockito.mock(IPersonRepository.class);
 	PurchaseorderheaderService pohService = new PurchaseorderheaderService(pohRepositoryMock, 
@@ -45,8 +46,8 @@ class PurchaseorderheaderServiceTest {
 		p.get().setBusinessentityid(1);
 		Mockito.when(personRepositoryMock.findById(1)).thenReturn(p);
 		Mockito.when(employeeRepositoryMock.findById(1)).thenReturn(e);
-		Mockito.when(pohRepositoryMock.findById(1)).thenReturn(poh);
-		Mockito.when(pohRepositoryMock.findById(1)).thenReturn(Optional.of(poh2));
+		Mockito.when(pohRepositoryMock.findById(1)).thenReturn(poh.get());
+		Mockito.when(pohRepositoryMock.findById(1)).thenReturn(poh2);
 		Mockito.when(employeeRepositoryMock.findById(2)).thenReturn(Optional.ofNullable(null));
 		Mockito.when(personRepositoryMock.findById(2)).thenReturn(Optional.ofNullable(null));
 	}

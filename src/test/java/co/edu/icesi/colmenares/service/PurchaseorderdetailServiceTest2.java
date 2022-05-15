@@ -13,6 +13,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import co.edu.icesi.colmenares.Taller2.Taller2Application;
+import co.edu.icesi.colmenares.dao.IPurchaseorderheaderDao;
 import co.edu.icesi.colmenares.model.prchasing.Purchaseorderdetail;
 import co.edu.icesi.colmenares.model.prchasing.Purchaseorderheader;
 import co.edu.icesi.colmenares.repository.IPurchaseorderheaderRepository;
@@ -22,11 +23,11 @@ import co.edu.icesi.colmenares.repository.IPurchaseorderheaderRepository;
 @ContextConfiguration(classes = Taller2Application.class)
 class PurchaseorderdetailServiceTest2 {
 
-	IPurchaseorderheaderRepository pohRepository;
+	IPurchaseorderheaderDao pohRepository;
 	IPurchaseorderdetailService podService;
 	
 @Autowired	
-	public PurchaseorderdetailServiceTest2(IPurchaseorderheaderRepository pohRepository,
+	public PurchaseorderdetailServiceTest2(IPurchaseorderheaderDao pohRepository,
 			IPurchaseorderdetailService podService) {
 		this.pohRepository = pohRepository;
 		this.podService = podService;

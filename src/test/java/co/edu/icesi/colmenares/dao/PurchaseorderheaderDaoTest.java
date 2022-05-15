@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.math.BigDecimal;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -37,22 +38,22 @@ class PurchaseorderheaderDaoTest {
 	void findAllTest() {
 		assertEquals(1, pohDao.findAll().size());
 	}
-	
+	@Disabled
 	@Test
 	void findByShipmethodTest() {
 		
 	}
-	
+	@Disabled
 	@Test
 	void findByVendorTest() {
 		
 	}
-	
+	@Disabled
 	@Test
 	void findWithTwoplusPurchaseorderdetailsTest() {
 		
 	}
-	
+	@Disabled
 	@Test
 	void findAllWithSumUnitpricesTest() {
 		

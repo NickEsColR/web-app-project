@@ -10,16 +10,16 @@ import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import co.edu.icesi.colmenares.Taller2.Taller2Application;
+import co.edu.icesi.colmenares.dao.IPurchaseorderdetailDao;
+import co.edu.icesi.colmenares.dao.IPurchaseorderheaderDao;
 import co.edu.icesi.colmenares.model.prchasing.Purchaseorderdetail;
 import co.edu.icesi.colmenares.model.prchasing.Purchaseorderheader;
-import co.edu.icesi.colmenares.repository.IPurchaseorderdetailRepository;
-import co.edu.icesi.colmenares.repository.IPurchaseorderheaderRepository;
 
 @SpringBootTest(classes = Taller2Application.class)
 class PurchaseorderdetailServiceTest {
 	
-	static IPurchaseorderheaderRepository pohRepositoryMock = Mockito.mock(IPurchaseorderheaderRepository.class);
-	static IPurchaseorderdetailRepository purchaseorderdetailRepositoryMock = Mockito.mock(IPurchaseorderdetailRepository.class);
+	static IPurchaseorderheaderDao pohRepositoryMock = Mockito.mock(IPurchaseorderheaderDao.class);
+	static IPurchaseorderdetailDao purchaseorderdetailRepositoryMock = Mockito.mock(IPurchaseorderdetailDao.class);
 	IPurchaseorderdetailService podService = new PurchaseorderdetailService(purchaseorderdetailRepositoryMock, pohRepositoryMock);
 	
 	@BeforeEach
@@ -34,10 +34,10 @@ class PurchaseorderdetailServiceTest {
 		pod.setOrderqty(1);
 		pod.setUnitprice(new BigDecimal(1));
 		pod.setPurchaseorderheader(poh.get());
-		Mockito.when(pohRepositoryMock.findById(1)).thenReturn(poh);
-		Mockito.when(purchaseorderdetailRepositoryMock.findById(1)).thenReturn(pod2);
-		Mockito.when(purchaseorderdetailRepositoryMock.findById(2)).thenReturn(Optional.of(pod));
-		Mockito.when(pohRepositoryMock.findById(2)).thenReturn(Optional.ofNullable(null));
+		Mockito.when(pohRepositoryMock.findById(1)).thenReturn(poh.get());
+		Mockito.when(purchaseorderdetailRepositoryMock.findById(1)).thenReturn(pod2.get());
+		Mockito.when(purchaseorderdetailRepositoryMock.findById(2)).thenReturn(pod);
+		Mockito.when(pohRepositoryMock.findById(2)).thenReturn(null);
 	}
 	
 	@Test
