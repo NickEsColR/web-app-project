@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
@@ -16,11 +17,13 @@ public class VendorDao implements IVendorDao {
 	
 	@PersistenceContext
 	private EntityManager entityManager;
-
+	@Transactional
 	@Override
 	public void save(Vendor entity) {
 		// TODO Auto-generated method stub
-		entityManager.persist(entity);
+		
+		entityManager.merge(entity);
+		
 	}
 
 	@Override

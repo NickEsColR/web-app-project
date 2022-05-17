@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,6 +20,7 @@ class VendorDaoTest {
 	@Autowired
 	private IVendorDao vendorDao;
 	
+	
 	@Test
 	void test() {
 		Vendor v = new Vendor();
@@ -26,13 +30,13 @@ class VendorDaoTest {
 		Vendor v2 = vendorDao.findById(1);
 		assertEquals(v.getName(), v2.getName());
 	}
-	
+	@Disabled
 	@Test
 	void findAllTest() {
 		List<Vendor> v = vendorDao.findAll();
 		assertEquals(1, v.size());
 	}
-	
+	@Disabled
 	@Test
 	void updateAndFindByCreditratingTest() {
 		Vendor v = vendorDao.findById(1);
@@ -41,7 +45,7 @@ class VendorDaoTest {
 		List<Vendor> v2 = vendorDao.findByCreditRating(1);
 		assertEquals(1, v2.size());
 	}
-	
+	@Disabled
 	@Test
 	void deleteTest() {
 		vendorDao.delete(vendorDao.findById(1));
