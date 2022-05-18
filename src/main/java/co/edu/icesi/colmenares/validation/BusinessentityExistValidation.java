@@ -4,9 +4,11 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import co.edu.icesi.colmenares.service.IBusinessentityService;
 
+@Component
 public class BusinessentityExistValidation implements ConstraintValidator<BusinessentityExist, Integer> {
 
 	@Autowired

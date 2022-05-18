@@ -34,7 +34,7 @@ public class Vendor implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "VENDOR_BUSINESSENTITYID_GENERATOR")
 	private java.lang.Integer vendorid;
 
-	@BusinessentityExist
+	
 	private int businessentityid;
 	
 	public int getBusinessentityid() {

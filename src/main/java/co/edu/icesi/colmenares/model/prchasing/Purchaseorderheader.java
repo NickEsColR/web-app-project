@@ -35,17 +35,17 @@ public class Purchaseorderheader implements Serializable {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="PURCHASEORDERHEADER_PURCHASEORDERID_GENERATOR")
 	private int purchaseorderid;
 
-	@EmployeeExist
+	
 	private int employeeid;
 	
-	@PersonExist
+	
 	private int personid;
 
 	private BigDecimal freight;
 
 	private Timestamp modifieddate;
 
-	@PresentConstraint
+	
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private LocalDate orderdate;
 

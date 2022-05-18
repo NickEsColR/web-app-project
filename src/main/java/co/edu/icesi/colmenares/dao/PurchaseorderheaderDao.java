@@ -31,7 +31,7 @@ public class PurchaseorderheaderDao implements IPurchaseorderheaderDao {
 	@Override
 	public void save(Purchaseorderheader entity) {
 		// TODO Auto-generated method stub
-		entityManager.persist(entity);
+		entityManager.merge(entity);
 	}
 
 	@Override
@@ -61,14 +61,14 @@ public class PurchaseorderheaderDao implements IPurchaseorderheaderDao {
 	@Override
 	public List<Purchaseorderheader> findByShipmethod(Shipmethod s) {
 		// TODO Auto-generated method stub
-		String sql ="select p from Purchaseorderheader p where shipmethod="+s.getShipmethodid();
+		String sql ="select p from Purchaseorderheader p where shipmethod.id="+s.getShipmethodid();
 		return entityManager.createQuery(sql).getResultList();
 	}
 
 	@Override
 	public List<Purchaseorderheader> findByVendor(Vendor v) {
 		// TODO Auto-generated method stub
-		String sql = "select p from Purchaseorderheader p where vendor="+v.getVendorid();
+		String sql = "select p from Purchaseorderheader p where vendor.id="+v.getVendorid();
 		return entityManager.createQuery(sql).getResultList();
 	}
 

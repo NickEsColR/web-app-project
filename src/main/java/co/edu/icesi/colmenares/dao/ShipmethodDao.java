@@ -20,7 +20,7 @@ public class ShipmethodDao implements IShipmethodDao {
 	@Override
 	public void save(Shipmethod entity) {
 		// TODO Auto-generated method stub
-		entityManager.persist(entity);
+		entityManager.merge(entity);
 	}
 
 	@Override

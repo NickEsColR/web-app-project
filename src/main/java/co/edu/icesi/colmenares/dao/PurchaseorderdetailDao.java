@@ -21,7 +21,7 @@ public class PurchaseorderdetailDao implements IPurchaseorderdetailDao {
 	@Override
 	public void save(Purchaseorderdetail entity) {
 		// TODO Auto-generated method stub
-		entityManager.persist(entity);
+		entityManager.merge(entity);
 	}
 
 	@Override

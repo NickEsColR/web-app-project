@@ -55,8 +55,8 @@ public class Purchaseorderdetail implements Serializable {
 	// bi-directional many-to-one association to Purchaseorderheader
 	@ManyToOne
 	@JoinColumn(name = "purchaseorderid")
-	@NotNull
-	@PurchaseorderheaderExist
+	
+	
 	private Purchaseorderheader purchaseorderheader;
 
 	public Purchaseorderdetail() {
