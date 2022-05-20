@@ -3,6 +3,10 @@ package co.edu.icesi.colmenares.dao;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -15,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import co.edu.icesi.colmenares.Taller2.Taller2Application;
+import co.edu.icesi.colmenares.model.prchasing.Purchaseorderdetail;
 import co.edu.icesi.colmenares.model.prchasing.Purchaseorderheader;
 import co.edu.icesi.colmenares.model.prchasing.Shipmethod;
 import co.edu.icesi.colmenares.model.prchasing.Vendor;
@@ -31,6 +36,8 @@ class PurchaseorderheaderDaoTest {
 	
 	@Autowired
 	private IVendorDao vendorDao;
+	@Autowired
+	IPurchaseorderdetailDao podDao;
 	
 	@Test
 	@Transactional
@@ -75,42 +82,96 @@ class PurchaseorderheaderDaoTest {
 		s.setShipbase(new BigDecimal(1));
 		s.setShiprate(new BigDecimal(1));
 		shipmethodDao.save(s);
+		s = shipmethodDao.findById(1);
 		Purchaseorderheader poh = new Purchaseorderheader();
 		poh.setPurchaseorderid(1);
 		poh.setSubtotal(new BigDecimal(1));
-		poh.setShipmethod(shipmethodDao.findById(1));
+		poh.setShipmethod(s);
 		pohDao.save(poh);
+		List<Purchaseorderheader> pl = new ArrayList<>();
+		pl.add(pohDao.findById(5));
+		s.setPurchaseorderheaders(pl);
+		shipmethodDao.save(s);
 		assertEquals(1, pohDao.findByShipmethod(s).size());
 	}
 	@Test
 	@Transactional
-	@Order(8)
+	@Order(6)
 	void findByVendorTest() {
 		Vendor v = new Vendor();
 		v.setBusinessentityid(1);
 		v.setCreditrating(1);
 		v.setName("prueba");
 		vendorDao.save(v);
+		v = vendorDao.findById(1);
 		Purchaseorderheader poh = new Purchaseorderheader();
 		poh.setPurchaseorderid(1);
 		poh.setSubtotal(new BigDecimal(1));
-		poh.setVendor(vendorDao.findById(1));
+		poh.setVendor(v);
 		pohDao.save(poh);
+		List<Purchaseorderheader> pl = new ArrayList<>();
+		pl.add(pohDao.findById(6));
+		v.setPurchaseorderheaders(pl);
+		vendorDao.save(v);
 		assertEquals(1, pohDao.findByVendor(v).size());
 	}
-	@Disabled
+
 	@Test
 	@Transactional
-	@Order(6)
+	@Order(8)
 	void findWithTwoplusPurchaseorderdetailsTest() {
-		
+		Purchaseorderheader poh = new Purchaseorderheader();
+		poh.setPurchaseorderid(1);
+		poh.setSubtotal(new BigDecimal(1));
+		pohDao.save(poh);
+		poh = pohDao.findById(8);
+		Purchaseorderdetail pod = new Purchaseorderdetail();
+		pod.setId(1);
+		pod.setOrderqty(1);
+		pod.setUnitprice(new BigDecimal(1));
+		pod.setPurchaseorderheader(poh);
+		podDao.save(pod);
+		pod = new Purchaseorderdetail();
+		pod.setId(1);
+		pod.setOrderqty(1);
+		pod.setUnitprice(new BigDecimal(1));
+		pod.setPurchaseorderheader(poh);
+		podDao.save(pod);
+		List<Purchaseorderdetail> pl = new ArrayList<Purchaseorderdetail>();
+		pl.add(podDao.findById(3));
+		pl.add(podDao.findById(4));
+		poh.setPurchaseorderdetails(pl);
+		pohDao.save(poh);
+		assertEquals(1, pohDao.findWithTwoplusPurchaseorderdetails().size());
 	}
-	@Disabled
 	@Test
 	@Transactional
 	@Order(7)
 	void findAllWithSumUnitpricesTest() {
-		
+		Purchaseorderheader poh = new Purchaseorderheader();
+		poh.setPurchaseorderid(1);
+		poh.setSubtotal(new BigDecimal(1));
+		poh.setOrderdate(LocalDate.of(2022, 4, 20));
+		pohDao.save(poh);
+		poh = pohDao.findById(7);
+		Purchaseorderdetail pod = new Purchaseorderdetail();
+		pod.setId(1);
+		pod.setOrderqty(1);
+		pod.setUnitprice(new BigDecimal(1));
+		pod.setPurchaseorderheader(poh);
+		podDao.save(pod);
+		pod = new Purchaseorderdetail();
+		pod.setId(1);
+		pod.setOrderqty(1);
+		pod.setUnitprice(new BigDecimal(1));
+		pod.setPurchaseorderheader(poh);
+		podDao.save(pod);
+		List<Purchaseorderdetail> pl = new ArrayList<Purchaseorderdetail>();
+		pl.add(podDao.findById(1));
+		pl.add(podDao.findById(2));
+		poh.setPurchaseorderdetails(pl);
+		pohDao.save(poh);
+		assertEquals(1, pohDao.findAllWithSumUnitprices(LocalDate.of(2022, 4, 10),LocalDate.of(2022, 4, 30)).size());
 	}
 	
 	@Test

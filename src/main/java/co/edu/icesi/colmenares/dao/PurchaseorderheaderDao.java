@@ -1,6 +1,7 @@
 package co.edu.icesi.colmenares.dao;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,30 +76,39 @@ public class PurchaseorderheaderDao implements IPurchaseorderheaderDao {
 	@Override
 	public List<Purchaseorderheader> findWithTwoplusPurchaseorderdetails() {
 		// TODO Auto-generated method stub
-		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-		CriteriaQuery<Purchaseorderheader> query = cb.createQuery(Purchaseorderheader.class);
-		Root<Purchaseorderheader> poh = query.from(Purchaseorderheader.class);
-		Path<Purchaseorderdetail> pod = poh.get("purchaseorderdetails");
-//		List<Predicate> predicates = new ArrayList<>();
-		//contar la lista purchaseorderdetails > 2 en where se puede?
-
-		query.select(poh).where(cb.gt(cb.count(pod), 2));			
-		
+//		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+//		CriteriaQuery<Purchaseorderheader> query = cb.createQuery(Purchaseorderheader.class);
+//		Root<Purchaseorderheader> poh = query.from(Purchaseorderheader.class);
+//		Path<Purchaseorderdetail> pod = poh.get("purchaseorderdetails");
+////		List<Predicate> predicates = new ArrayList<>();
+//		//contar la lista purchaseorderdetails > 2 en where se puede?
+//
+//		query.select(poh).where(cb.gt(cb.count(pod), 2));			
+		String query = "select poh "
+				+ "from Purchaseorderheader poh "
+				+ "where ("
+				+ "select count(pod) "
+				+ "from Purchaseorderdetail pod "
+				+ "where pod.purchaseorderheader.purchaseorderid=poh.purchaseorderid) >= 2";
 		return entityManager.createQuery(query).getResultList();
 	}
 
 	@Override
-	public List<Purchaseorderheader> findAllWithSumUnitprices() {
+	public List<Purchaseorderheader> findAllWithSumUnitprices(LocalDate start, LocalDate end) {
 		// TODO Auto-generated method stub
-		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-		CriteriaQuery<Purchaseorderheader> query = cb.createQuery(Purchaseorderheader.class);
-		Root<Purchaseorderheader> poh = query.from(Purchaseorderheader.class);
-		Path<BigDecimal> unitPrice = query.from(Purchaseorderdetail.class).get("unitprice");
-		Path<Purchaseorderheader> pohOfpod = query.from(Purchaseorderdetail.class).get("purchaseorderheader");
-		//select poh, sum(pod.unitprice) where equals(pod.poh,poh)x
-		query.multiselect(poh,cb.sum(unitPrice)).where(cb.equal(poh, pohOfpod));
+//		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+//		CriteriaQuery<Purchaseorderheader> query = cb.createQuery(Purchaseorderheader.class);
+//		Root<Purchaseorderheader> poh = query.from(Purchaseorderheader.class);
+//		Path<BigDecimal> unitPrice = query.from(Purchaseorderdetail.class).get("unitprice");
+//		Path<Purchaseorderheader> pohOfpod = query.from(Purchaseorderdetail.class).get("purchaseorderheader");
+//		//select poh, sum(pod.unitprice) where equals(pod.poh,poh)x
+//		query.multiselect(poh,cb.sum(unitPrice)).where(cb.equal(poh, pohOfpod));
+		String query = "select poh, sum(pod.unitprice) "
+				+ "from Purchaseorderheader poh, Purchaseorderdetail pod "
+				+ "where pod.purchaseorderheader.purchaseorderid=poh.purchaseorderid and "
+				+ "poh.orderdate between :start and :end";
 		
-		return entityManager.createQuery(query).getResultList();
+		return entityManager.createQuery(query).setParameter("start", start).setParameter("end", end).getResultList();
 	}
 
 }

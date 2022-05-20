@@ -1,5 +1,6 @@
 package co.edu.icesi.colmenares.dao;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import co.edu.icesi.colmenares.model.prchasing.Purchaseorderheader;
@@ -18,5 +19,5 @@ public interface IPurchaseorderheaderDao {
 	//usando jpql
 	public List<Purchaseorderheader> findWithTwoplusPurchaseorderdetails();//2.b
 	//devolver el encabezado y la suma de los unitprice de sus details
-	public List<Purchaseorderheader> findAllWithSumUnitprices();
+	public List<Purchaseorderheader> findAllWithSumUnitprices(LocalDate start, LocalDate end);
 }
