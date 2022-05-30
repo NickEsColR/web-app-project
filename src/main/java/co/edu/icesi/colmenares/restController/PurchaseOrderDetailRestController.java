@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.edu.icesi.colmenares.model.prchasing.Purchaseorderdetail;
-import co.edu.icesi.colmenares.model.prchasing.Vendor;
 import co.edu.icesi.colmenares.service.PurchaseorderdetailService;
 
 @RestController
