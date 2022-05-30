@@ -6,10 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import co.edu.icesi.colmenares.model.prchasing.Vendor;
 import co.edu.icesi.colmenares.service.VendorService;
 
@@ -41,5 +41,13 @@ public class VendorRestController {
 			return vendor.get();
 		else
 			return null;
+	}
+	
+	@PutMapping
+	public void update(@RequestBody Vendor vendor) {
+		vendorService.setCreditrating(vendor.getCreditrating(),vendor.getBusinessentityid());
+		vendorService.setName(vendor.getName(),vendor.getBusinessentityid());
+		vendorService.setPurchasingwebserviceurl(vendor.getPurchasingwebserviceurl(),vendor.getBusinessentityid());
+
 	}
 }
