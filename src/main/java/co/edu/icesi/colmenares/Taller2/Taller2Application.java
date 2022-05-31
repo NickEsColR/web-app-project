@@ -1,5 +1,11 @@
 package co.edu.icesi.colmenares.Taller2;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.transaction.Transactional;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,15 +16,21 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 
+import co.edu.icesi.colmenares.dao.IPurchaseorderdetailDao;
+import co.edu.icesi.colmenares.dao.IPurchaseorderheaderDao;
 import co.edu.icesi.colmenares.model.hr.Employee;
 import co.edu.icesi.colmenares.model.person.Businessentity;
 import co.edu.icesi.colmenares.model.person.Person;
+import co.edu.icesi.colmenares.model.prchasing.Purchaseorderdetail;
+import co.edu.icesi.colmenares.model.prchasing.Purchaseorderheader;
 import co.edu.icesi.colmenares.model.security.UserApp;
 import co.edu.icesi.colmenares.model.security.UserType;
 import co.edu.icesi.colmenares.repository.IBusinessentityRepository;
 import co.edu.icesi.colmenares.repository.IEmployeeRepository;
 import co.edu.icesi.colmenares.repository.IPersonRepository;
 import co.edu.icesi.colmenares.repository.IUserAppRepository;
+import co.edu.icesi.colmenares.service.IPurchaseorderdetailService;
+import co.edu.icesi.colmenares.service.IPurchaseorderheaderService;
 
 
 
@@ -33,10 +45,12 @@ public class Taller2Application {
 		SpringApplication.run(Taller2Application.class, args);
 	}
 	
+	
 	@Bean
 	public CommandLineRunner clr(IEmployeeRepository employeeRepository,
 			IPersonRepository personRepository, 
-			IBusinessentityRepository businessentityRepository, IUserAppRepository userAppRepository) {
+			IBusinessentityRepository businessentityRepository, IUserAppRepository userAppRepository,IPurchaseorderdetailService podDao,
+			IPurchaseorderheaderService pohDao) {
 		return (args)->{
 			//businessentities
 			Businessentity be = new Businessentity();
@@ -70,6 +84,30 @@ public class Taller2Application {
 			u.setUsername("operator");
 			u.setPassword("{noop}operator");
 			userAppRepository.save(u);
+			//advance queries
+//			Purchaseorderheader poh = new Purchaseorderheader();
+//			poh.setPurchaseorderid(1);
+//			poh.setSubtotal(new BigDecimal(1));
+//			pohDao.savePurchaseorderheader(poh);
+//			poh = pohDao.findById(1).get();
+//			Purchaseorderdetail pod = new Purchaseorderdetail();
+//			pod.setId(1);
+//			pod.setOrderqty(1);
+//			pod.setUnitprice(new BigDecimal(1));
+//			pod.setPurchaseorderheader(poh);
+//			podDao.savePurchaseorderdetail(pod);
+//			pod = new Purchaseorderdetail();
+//			pod.setId(1);
+//			pod.setOrderqty(1);
+//			pod.setUnitprice(new BigDecimal(1));
+//			pod.setPurchaseorderheader(poh);
+//			podDao.savePurchaseorderdetail(pod);
+//			List<Purchaseorderdetail> pl = new ArrayList<Purchaseorderdetail>();
+//			pl.add(podDao.findById(1).get());
+//			pl.add(podDao.findById(2).get());
+//			poh.setPurchaseorderdetails(pl);
+//			pohDao.savePurchaseorderheader(poh);
+			
 		};
 	}
 

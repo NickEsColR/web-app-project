@@ -2,6 +2,7 @@ package co.edu.icesi.colmenares.service;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 import co.edu.icesi.colmenares.model.prchasing.Purchaseorderheader;
@@ -19,4 +20,6 @@ public interface IPurchaseorderheaderService {
 	int getPersonid(int id);
 	Iterable<Purchaseorderheader> findAll();
 	Optional<Purchaseorderheader> findById(int id);
+	List<Purchaseorderheader> findWithTwoplusPurchaseorderdetails();
+	List<Purchaseorderheader> findAllWithSumUnitprices(LocalDate start, LocalDate end);
 }

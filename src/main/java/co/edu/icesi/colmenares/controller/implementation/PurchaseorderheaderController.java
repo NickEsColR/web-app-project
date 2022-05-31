@@ -1,5 +1,6 @@
 package co.edu.icesi.colmenares.controller.implementation;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -95,5 +96,30 @@ public class PurchaseorderheaderController implements IPurchaseorderheaderContro
 			throw new IllegalArgumentException("Invalid id "+id);
 		model.addAttribute("purchaseorderheader",p.get());
 		return "/purchaseorderheaders/info";
+	}
+	
+	@GetMapping("/purchaseorderheaders/2+")
+	public String findWithTwoplusPurchaseorderdetails(Model model) {
+		model.addAttribute("purchaseorderheaders",purchaseorderheaderService.findWithTwoplusPurchaseorderdetails());
+		return "/purchaseorderheaders/index";
+	}
+	
+	@GetMapping("/purchaseorderheaders/filterDates")
+	public String showFilterDate() {
+		return "/purchaseorderheaders/filterdate";
+	}
+	
+	@PostMapping("/purchaseorderheaders/")
+	public String findAllWithSumUnitprices(Model model, @RequestParam(value="startdate", required=true)String startdate, 
+			@RequestParam(value="enddate", required=false)String enddate, 
+			@RequestParam(value="action", required=false)String action) {
+		if(action.equals("Cancel"))
+			return "redirect:/purchaseorderheaders/";
+		else {
+			
+			model.addAttribute("purchaseorderheaders", purchaseorderheaderService.findAllWithSumUnitprices
+					(LocalDate.parse(startdate), LocalDate.parse(enddate)));
+		}
+		return "/purchaseorderheaders/index";
 	}
 }

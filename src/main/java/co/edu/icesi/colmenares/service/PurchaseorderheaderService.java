@@ -3,6 +3,7 @@ package co.edu.icesi.colmenares.service;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -153,5 +154,17 @@ public class PurchaseorderheaderService implements IPurchaseorderheaderService {
 		return Optional.ofNullable(purchaseorderheaderRepository.findById(id));
 	}
 
+	@Override
+	public List<Purchaseorderheader> findWithTwoplusPurchaseorderdetails() {
+		// TODO Auto-generated method stub
+		return purchaseorderheaderRepository.findWithTwoplusPurchaseorderdetails();
+	}
+
+	@Override
+	public List<Purchaseorderheader> findAllWithSumUnitprices(LocalDate start, LocalDate end) {
+		// TODO Auto-generated method stub
+		return purchaseorderheaderRepository.findAllWithSumUnitprices(start, end);
+	}
+	
 
 }
