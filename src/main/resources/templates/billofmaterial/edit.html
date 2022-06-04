@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
-<title>Add Product Review</title>
+<title>Edit Bill of material</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
@@ -16,37 +16,37 @@
 </head>
 <body>
 	<div class="container my-5">
-		<h2 class="mb-5">New Product Review</h2>
+		<h2 class="mb-5"> Bill of material</h2>
 		<div class="row">
 			<div class="col-md-6">
-				<form action="#" th:action="@{/productreview/add}" th:object="${productreview}"
+				<form action="#" th:action="@{/billofmaterial/edit/{id}(id=*{billofmaterialsid})}" th:object="${billofmaterial}"
 					method="post">
 					<div class="row">
 						<div class="form-group col-md-6">
-							<label for="comments" class="col-form-label">comments</label> <input
-								type="text" th:field="*{comments}" class="form-control" id="comments"
-								placeholder="Comments"> <span
-								th:if="${#fields.hasErrors('comments')}" th:errors="*{comments}"
-								class="text-danger"></span><br>
-							<label for="emailaddress" class="col-form-label">email address</label> <input
-								type="text" th:field="*{emailaddress}" class="form-control" id="emailaddress"
-								placeholder="emailaddress"> <span
-								th:if="${#fields.hasErrors('emailaddress')}" th:errors="*{emailaddress}"
-								class="text-danger"></span>
+							<label for="unitmeasure" class="col-form-label">unit measure</label> <select
+								th:field="*{unitmeasure}">
+								<option th:each="unitmeasure : ${unitmeasures}" th:value="${unitmeasure.unitmeasurecode}"
+									class="form-control" th:text="${unitmeasure.unitmeasurecode}"
+									th:selected="${billofmaterial.unitmeasure=unitmeasure}"></option>
+							</select> <span th:if="${#fields.hasErrors('unitmeasure')}"
+								th:errors="*{unitmeasure}" class="text-danger"></span>
+							<input type="submit" name="action" class="btn btn-primary"
+								value="Create new unit measure">
+							
 						</div>
 						<div class="form-group col-md-6">
-							<label for="rating" class="col-form-label">rating</label> <input
-								type="number" th:field="*{rating}" class="form-control" id="rating"
-								placeholder="rating" value="0"> <span
-								th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}"
+							<label for="bomlevel" class="col-form-label">bom level</label> <input
+								type="number" th:field="*{bomlevel}" class="form-control" id="bomlevel"
+								placeholder="bomlevel" th:value="*{bomlevel}"> <span
+								th:if="${#fields.hasErrors('bomlevel')}" th:errors="*{bomlevel}"
 								class="text-danger"></span><br>
 							<label for="product" class="col-form-label">product</label> <select
-								th:field="*{product}">
+								th:field="*{product1}">
 								<option th:each="product : ${products}" th:value="${product.productid}"
 									class="form-control" th:text="${product.productid}"
-									th:selected="${productreview.product=product}"></option>
-							</select> <span th:if="${#fields.hasErrors('product')}"
-								th:errors="*{product}" class="text-danger"></span>
+									th:selected="${productreviewl.product1=product}"></option>
+							</select> <span th:if="${#fields.hasErrors('product1')}"
+								th:errors="*{product1}" class="text-danger"></span>
 							<input type="submit" name="action" class="btn btn-primary"
 								value="Create new Product">
 						</div>
@@ -55,7 +55,7 @@
 					<div class="row">
 						<div class="col-md-6 mt-3">
 							<input type="submit" name="action" class="btn btn-primary"
-								value="Add productreview">
+								value="Update bill of material">
 						</div>
 						<div class="col-md-3 mt-3">
 							<input type="reset" class="btn btn-secondary" value="Clear">

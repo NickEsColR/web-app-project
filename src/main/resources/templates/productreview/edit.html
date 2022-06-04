@@ -41,10 +41,10 @@
 								th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}"
 								class="text-danger"></span><br>
 							<label for="product" class="col-form-label">product</label> <select
-								th:field="*{products}">
+								th:field="*{product}">
 								<option th:each="product : ${products}" th:value="${product.productid}"
 									class="form-control" th:text="${product.productid}"
-									th:selected="${productreviewl.product=product}"></option>
+									th:selected="${productreview.product=product}"></option>
 							</select> <span th:if="${#fields.hasErrors('product')}"
 								th:errors="*{product}" class="text-danger"></span>
 							<input type="submit" name="action" class="btn btn-primary"
@@ -55,7 +55,7 @@
 					<div class="row">
 						<div class="col-md-6 mt-3">
 							<input type="submit" name="action" class="btn btn-primary"
-								value="Add productreview">
+								value="Update productreview">
 						</div>
 						<div class="col-md-3 mt-3">
 							<input type="reset" class="btn btn-secondary" value="Clear">
