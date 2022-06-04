@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title> Product</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+	integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+	crossorigin="anonymous">
+</head>
+<body>
+	<div class="container my-5">
+		<h2 class="mb-5"> Product</h2>
+		<div class="row">
+			<div class="col-md-6">
+				<form action="#" th:action="@{/productreview/}" th:object="${product}"
+					method="get">
+					<div class="row">
+						<div class="form-group col-md-6">
+							<label for = "id" class="col-form-label">Id</label>
+							<input type="number" th:field="*{productid}" th:value="*{productid}" disabled class="form-control"><br>
+							<label for="color" class="col-form-label">color</label> <input
+								type="text" th:field="*{color}" class="form-control" id="color"
+								placeholder="color" th:value="*{color}" disabled> <span
+								th:if="${#fields.hasErrors('color')}" th:errors="*{color}"
+								class="text-danger"></span><br>
+							<label for="name" class="col-form-label">name </label> <input
+								type="text" th:field="*{name}" class="form-control" id="name"
+								placeholder="name" th:value="*{name}" disabled> <span
+								th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+								class="text-danger"></span>
+						</div>
+						<div class="form-group col-md-6">
+							<label for="listprice" class="col-form-label">price</label> <input
+								type="number" th:field="*{listprice}" class="form-control" id="listprice"
+								placeholder="listprice" th:value="*{listprice}" disabled> <span
+								th:if="${#fields.hasErrors('listprice')}" th:errors="*{listprice}"
+								class="text-danger"></span><br>
+							<label for="weight" class="col-form-label">weight</label> <input
+								type="number" th:field="*{weight}" class="form-control" id="weight"
+								placeholder="weight" th:value="*{weight}" disabled> <span
+								th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}"
+								class="text-danger"></span><br>
+								<br>
+								<br>
+								<input type="submit" name="action" class="btn btn-secondary"
+								value="Go back">
+						</div>
+						
+					</div>
+					
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
