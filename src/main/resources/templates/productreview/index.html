@@ -40,7 +40,8 @@
 								<td class="text-info" th:text="${productreview.comments}"></td>
 								<td class="text-info" th:text="${productreview.emailaddress}"></td>
 								<td class="text-info" th:text="${productreview.rating}"></td>
-								<td class="text-info" th:text="${productreview.product}"></td>
+								<td> <a class="text-primary" th:text="${productreview.product}"
+									th:ref="@{/product/info/{id}(id=*{product.productid})}"></a></td>
 								<td><a th:href="@{/productreview/edit/{id}(id=${productreview.productreviewid})}"
 									class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
 								<td><a th:href="@{/productreview/del/{id}(id=${productreview.productreviewid})}"
