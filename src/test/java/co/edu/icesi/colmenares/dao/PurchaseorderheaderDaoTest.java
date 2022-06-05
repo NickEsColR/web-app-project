@@ -171,7 +171,8 @@ class PurchaseorderheaderDaoTest {
 		pl.add(podDao.findById(2));
 		poh.setPurchaseorderdetails(pl);
 		pohDao.save(poh);
-		assertEquals(1, pohDao.findAllWithSumUnitprices(LocalDate.of(2022, 4, 10),LocalDate.of(2022, 4, 30)).size());
+		List<Object> list = pohDao.findAllWithSumUnitprices(LocalDate.of(2022, 4, 10),LocalDate.of(2022, 4, 30));
+		assertEquals(1, list.size());
 	}
 	
 	@Test

@@ -94,7 +94,7 @@ public class PurchaseorderheaderDao implements IPurchaseorderheaderDao {
 	}
 
 	@Override
-	public List<Purchaseorderheader> findAllWithSumUnitprices(LocalDate start, LocalDate end) {
+	public List<Object> findAllWithSumUnitprices(LocalDate start, LocalDate end) {
 		// TODO Auto-generated method stub
 //		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 //		CriteriaQuery<Purchaseorderheader> query = cb.createQuery(Purchaseorderheader.class);

@@ -19,5 +19,5 @@ public interface IPurchaseorderheaderDao {
 	//usando jpql
 	public List<Purchaseorderheader> findWithTwoplusPurchaseorderdetails();//2.b
 	//devolver el encabezado y la suma de los unitprice de sus details
-	public List<Purchaseorderheader> findAllWithSumUnitprices(LocalDate start, LocalDate end);
+	public List<Object> findAllWithSumUnitprices(LocalDate start, LocalDate end);
 }
