@@ -16,7 +16,7 @@ import co.edu.icesi.colmenares.model.prchasing.Vendor;
 import co.edu.icesi.colmenares.service.ShipmethodService;
 
 @RestController
-@RequestMapping("/shipmethods")
+@RequestMapping("/api/shipmethods")
 public class ShipMethodRestController {
 	
 	private ShipmethodService smService;

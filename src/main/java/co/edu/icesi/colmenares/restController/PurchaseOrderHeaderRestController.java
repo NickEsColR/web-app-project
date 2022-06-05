@@ -15,7 +15,7 @@ import co.edu.icesi.colmenares.model.prchasing.Purchaseorderheader;
 import co.edu.icesi.colmenares.service.PurchaseorderheaderService;
 
 @RestController
-@RequestMapping("/purchaseorderheaders")
+@RequestMapping("/api/purchaseorderheaders")
 public class PurchaseOrderHeaderRestController {
 	
 	private PurchaseorderheaderService pohService;

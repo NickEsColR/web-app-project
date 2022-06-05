@@ -16,7 +16,7 @@ import co.edu.icesi.colmenares.service.UserAppService;
 
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api/users")
 public class UserRestController {
 	private UserAppService userService;
 

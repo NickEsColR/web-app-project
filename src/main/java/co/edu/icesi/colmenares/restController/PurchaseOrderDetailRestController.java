@@ -15,7 +15,7 @@ import co.edu.icesi.colmenares.model.prchasing.Purchaseorderdetail;
 import co.edu.icesi.colmenares.service.PurchaseorderdetailService;
 
 @RestController
-@RequestMapping("/purchaseorderdetails")
+@RequestMapping("/api/purchaseorderdetails")
 public class PurchaseOrderDetailRestController {
 	
 	private PurchaseorderdetailService podService;

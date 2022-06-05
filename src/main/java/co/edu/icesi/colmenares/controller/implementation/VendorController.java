@@ -13,31 +13,30 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import co.edu.icesi.colmenares.businessdelegate.BusinessDelegateRestTemplate;
 import co.edu.icesi.colmenares.controller.interfaces.IVendorController;
 import co.edu.icesi.colmenares.model.person.Businessentity;
 import co.edu.icesi.colmenares.model.prchasing.Vendor;
-import co.edu.icesi.colmenares.service.IBusinessentityService;
-import co.edu.icesi.colmenares.service.IVendorService;
+
 
 @Controller
 public class VendorController implements IVendorController {
-
-	@Autowired
-	private IVendorService vendorService;
 	
 	@Autowired
-	private IBusinessentityService businessentityService;
+	private BusinessDelegateRestTemplate bDelegate;
+	
 
 	@GetMapping("/vendors/")
 	public String loadIndex(Model model) {
-		model.addAttribute("vendors", vendorService.findAll());
+		System.out.println("Hello   ");
+		model.addAttribute("vendors", bDelegate.vendorFindAll());
 		return "/vendors/index";
 	}
 
 	@GetMapping("/vendors/add")
 	public String loadAdd(Model model) {
 		model.addAttribute("vendor", new Vendor());
-		model.addAttribute("businessentities", businessentityService.findAll());
+		model.addAttribute("businessentities",bDelegate.businessentityFindAll());
 		return "/vendors/add-vendor";
 	}
 
@@ -48,26 +47,26 @@ public class VendorController implements IVendorController {
 		if (action.equals("Cancel"))
 			return "redirect:/vendors/";
 		else if(action.equals("Create new Business entity")) {
-			businessentityService.save(new Businessentity());
-			model.addAttribute("businessentities", businessentityService.findAll());
+			bDelegate.businessentitySave(new Businessentity());
+			model.addAttribute("businessentities",bDelegate.businessentityFindAll());
 			return "/vendors/add-vendor";
 		}
 		else if (bindingResult.hasErrors()) {
-			model.addAttribute("businessentities", businessentityService.findAll());
+			model.addAttribute("businessentities", bDelegate.businessentityFindAll());
 			return "/vendors/add-vendor";
 		}else {
-			vendorService.saveVendor(vendor);			
+			bDelegate.vendorSave(vendor);	
 			return "redirect:/vendors/";
 		}
 	}
 	
 	@GetMapping("/vendors/edit/{id}")
 	public String loadEdit(@PathVariable("id") Integer id, Model model) {
-		Optional<Vendor> v = vendorService.findById(id);
-		if(v.isEmpty())
+		Vendor v = bDelegate.vendorFindById(id);
+		if(v == null)
 			throw new IllegalArgumentException("Invalid vendor Id:" + id);
-		model.addAttribute("vendor", v.get());
-		model.addAttribute("businessentities", businessentityService.findAll());
+		model.addAttribute("vendor", v);
+		model.addAttribute("businessentities", bDelegate.businessentityFindAll());
 		return "/vendors/edit";
 	}
 	
@@ -78,14 +77,14 @@ public class VendorController implements IVendorController {
 		if(action.equals("Cancel")) {
 			return "redirect:/vendors/";	
 		}else if(action.equals("Create new Business entity")) {
-			businessentityService.save(new Businessentity());
-			model.addAttribute("businessentities", businessentityService.findAll());
+			bDelegate.businessentitySave(new Businessentity());
+			model.addAttribute("businessentities", bDelegate.businessentityFindAll());
 			return "/vendors/edit";
 		}else if(bindingResult.hasErrors()) {
-			model.addAttribute("businessentities", businessentityService.findAll());
+			model.addAttribute("businessentities", bDelegate.businessentityFindAll());
 			return "/vendors/edit";
 		}else {
-			vendorService.saveVendor(vendor);
+			bDelegate.vendorSave(vendor);
 			return "redirect:/vendors/";
 		}
 	}
