@@ -4,11 +4,17 @@ import java.math.BigDecimal;
 import java.util.HashSet;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Component;
@@ -51,12 +57,8 @@ public class BusinessDelegateRestTemplate {
 
 	public BusinessDelegateRestTemplate() {
 		this.restTemplate = new RestTemplate();
-		System.out.println(" HYYY");
-		List<HttpMessageConverter<?>> messageConverters = new ArrayList<HttpMessageConverter<?>>();
-        MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
-        converter.setSupportedMediaTypes(Collections.singletonList(MediaType.APPLICATION_JSON));
-        messageConverters.add(converter);
-        this.restTemplate.setMessageConverters(messageConverters);
+		
+
 	}
 
 	//User
@@ -82,10 +84,10 @@ public class BusinessDelegateRestTemplate {
 
 	//Vendor
 
-	public Iterable<Vendor> vendorFindAll() {
+	public List<Vendor> vendorFindAll() {
 		System.out.println(" MY FFFF");
 		
-		return restTemplate.getForObject(URI_VENDOR, HashSet.class);
+		return Arrays.asList(restTemplate.getForObject(URI_VENDOR, Vendor[].class));
 	}
 
 	public Vendor vendorFindById(long id) {
