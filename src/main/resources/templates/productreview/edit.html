@@ -37,7 +37,7 @@
 						<div class="form-group col-md-6">
 							<label for="rating" class="col-form-label">rating</label> <input
 								type="number" th:field="*{rating}" class="form-control" id="rating"
-								placeholder="rating" th:value="*{rating}rating"> <span
+								placeholder="rating" th:value="*{rating}"> <span
 								th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}"
 								class="text-danger"></span><br>
 							<label for="product" class="col-form-label">product</label> <select
@@ -50,7 +50,7 @@
 							<input type="submit" name="action" class="btn btn-primary"
 								value="Create new Product">
 						</div>
-						
+						<input hidden="true" th:field="*{productreviewid}" th:value="*{productreviewid}">
 					</div>
 					<div class="row">
 						<div class="col-md-6 mt-3">

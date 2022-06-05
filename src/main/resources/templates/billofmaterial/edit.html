@@ -24,7 +24,7 @@
 					<div class="row">
 						<div class="form-group col-md-6">
 							<label for="unitmeasure" class="col-form-label">unit measure</label> <select
-								th:field="*{unitmeasure}">
+								th:name="unitmeasurev">
 								<option th:each="unitmeasure : ${unitmeasures}" th:value="${unitmeasure.unitmeasurecode}"
 									class="form-control" th:text="${unitmeasure.unitmeasurecode}"
 									th:selected="${billofmaterial.unitmeasure=unitmeasure}"></option>
@@ -44,13 +44,13 @@
 								th:field="*{product1}">
 								<option th:each="product : ${products}" th:value="${product.productid}"
 									class="form-control" th:text="${product.productid}"
-									th:selected="${productreviewl.product1=product}"></option>
+									th:selected="${billofmaterial.product1=product}"></option>
 							</select> <span th:if="${#fields.hasErrors('product1')}"
 								th:errors="*{product1}" class="text-danger"></span>
 							<input type="submit" name="action" class="btn btn-primary"
 								value="Create new Product">
 						</div>
-						
+						<input hidden="true" th:field="*{billofmaterialsid}" th:value="*{billofmaterialsid}">
 					</div>
 					<div class="row">
 						<div class="col-md-6 mt-3">

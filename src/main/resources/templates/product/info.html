@@ -19,7 +19,7 @@
 		<h2 class="mb-5"> Product</h2>
 		<div class="row">
 			<div class="col-md-6">
-				<form action="#" th:action="@{/productreview/}" th:object="${product}"
+				<form action="#" th:action="@{/product/info/${from}}" th:object="${product}"
 					method="get">
 					<div class="row">
 						<div class="form-group col-md-6">
@@ -52,7 +52,7 @@
 								<input type="submit" name="action" class="btn btn-secondary"
 								value="Go back">
 						</div>
-						
+						<input hidden th:field="${from}" th:value="${from}">
 					</div>
 					
 				</form>

@@ -30,7 +30,7 @@ public class UnitmeasureDao implements IUnitmeasureDao {
 	}
 
 	@Override
-	public Unitmeasure findById(String id) {
+	public Unitmeasure findById(int id) {
 		// TODO Auto-generated method stub
 		return entityManager.find(Unitmeasure.class, id);
 	}

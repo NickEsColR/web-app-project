@@ -2,6 +2,8 @@ package co.edu.icesi.colmenares.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,12 +15,14 @@ public class ProductService implements IProductService {
 	@Autowired
 	private IProductDao dao;
 	
+	@Transactional
 	@Override
 	public void save(Product p) {
 		// TODO Auto-generated method stub
 		dao.save(p);
 	}
 
+	@Transactional
 	@Override
 	public void delete(Product p) {
 		// TODO Auto-generated method stub

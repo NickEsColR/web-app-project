@@ -7,6 +7,6 @@ import co.edu.icesi.colmenares.model.prod.Unitmeasure;
 public interface IUnitmeasureDao {
 	public void save(Unitmeasure u);
 	public void delete(Unitmeasure u);
-	public Unitmeasure findById(String id);
+	public Unitmeasure findById(int id);
 	public List<Unitmeasure> findAll();
 }

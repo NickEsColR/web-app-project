@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="../css/shards.min.css">
 </head>
 <body>
-	<div th:switch="${productreviews}" class="container my-5">
+	<div th:switch="${billofmaterials}" class="container my-5">
 		<div class="row">
 			<div class="col-md-10">
 				<h2 th:case="null">No Bill of material yet!</h2>
@@ -37,10 +37,10 @@
 							<tr th:each="bom : ${billofmaterials}">
 								<td class="text-info" th:text="${bom.billofmaterialsid}"></td>
 								<td class="text-info" th:text="${bom.bomlevel}"></td>
-								<td> <a class="text-info" th:text="${bom.unitmeasure.unitmeasurecode}"
-									th:ref="@{/unitmeasure/info/{id}(id=*{unitmeasure.unitmeasurecode})}"></a></td>
+								<td> <a class="text-primary" th:text="${bom.unitmeasure.unitmeasurecode}"
+									th:href="@{/unitmeasure/info/{id}(id=${bom.unitmeasure.unitmeasurecode})}"></a></td>
 								<td> <a class="text-primary" th:text="${bom.product1.productid}"
-									th:ref="@{/product/info/{id}(id=*{product1.productid})}"></a></td>
+									th:href="@{/product/info/billofmaterial/{id}(id=${bom.product1.productid})}"></a></td>
 								<td><a th:href="@{/billofmaterial/edit/{id}(id=${bom.billofmaterialsid})}"
 									class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
 								<td><a th:href="@{/billofmaterial/del/{id}(id=${bom.billofmaterialsid})}"
