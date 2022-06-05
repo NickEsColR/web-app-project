@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import co.edu.icesi.colmenares.businessdelegate.BusinessDelegateRestTemplate;
 import co.edu.icesi.colmenares.controller.interfaces.IShipmethodController;
 import co.edu.icesi.colmenares.model.prchasing.Shipmethod;
 import co.edu.icesi.colmenares.model.prchasing.Vendor;
@@ -22,11 +23,11 @@ import co.edu.icesi.colmenares.service.IShipmethodService;
 public class ShipmethodController implements IShipmethodController {
 
 	@Autowired
-	private IShipmethodService shipmethodService;
+	private BusinessDelegateRestTemplate bDelegate;
 
 	@GetMapping("/shipmethods/")
 	public String loadIndex(Model model) {
-		model.addAttribute("shipmethods", shipmethodService.findAll());
+		model.addAttribute("shipmethods", bDelegate.shipmethodFindAll());
 		return "/shipmethods/index";
 	}
 	
@@ -45,17 +46,17 @@ public class ShipmethodController implements IShipmethodController {
 		else if (bindingResult.hasErrors()) {
 			return "/shipmethods/add";
 		}else {
-			shipmethodService.saveShipmethod(shipmethod);			
+			bDelegate.shipmethodSave(shipmethod);			
 			return "redirect:/shipmethods/";
 		}
 	}
 	
 	@GetMapping("/shipmethods/edit/{id}")
 	public String loadEdit(Model model, @PathVariable("id")Integer id) {
-		Optional<Shipmethod> s = shipmethodService.findById(id);
-		if(s.isEmpty()) 
+		Shipmethod s = bDelegate.shipmethodFindById(id);
+		if(s == null) 
 			throw new IllegalArgumentException("invalid id "+id);
-		model.addAttribute("shipmethod", s.get());	
+		model.addAttribute("shipmethod", s);	
 		return "/shipmethods/edit";
 	}
 	
@@ -68,7 +69,7 @@ public class ShipmethodController implements IShipmethodController {
 		else if(bindingResult.hasErrors())
 			return "/shipmethods/edit";
 		else
-			shipmethodService.saveShipmethod(shipmethod);
+			bDelegate.shipmethodSave(shipmethod);
 		return "redirect:/shipmethods/";
 	}
 }

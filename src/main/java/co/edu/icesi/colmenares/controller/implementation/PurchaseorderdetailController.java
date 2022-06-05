@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import co.edu.icesi.colmenares.businessdelegate.BusinessDelegateRestTemplate;
 import co.edu.icesi.colmenares.controller.interfaces.IPurchaseorderdetailController;
 import co.edu.icesi.colmenares.model.prchasing.Purchaseorderdetail;
 import co.edu.icesi.colmenares.model.prchasing.Purchaseorderheader;
@@ -23,21 +24,18 @@ import co.edu.icesi.colmenares.service.IPurchaseorderheaderService;
 public class PurchaseorderdetailController implements IPurchaseorderdetailController {
 
 	@Autowired
-	private IPurchaseorderdetailService purchaseorderdetailService;
-	
-	@Autowired
-	private IPurchaseorderheaderService purchaseorderheaderService;
+	private BusinessDelegateRestTemplate bDelegate;
 	
 	@GetMapping("/purchaseorderdetails")
 	public String loadIndex(Model model) {
-		model.addAttribute("purchaseorderdetails",purchaseorderdetailService.findAll());
+		model.addAttribute("purchaseorderdetails",bDelegate.purchaseorderdetailFindAll());
 		return "/purchaseorderdetails/index";
 	}
 	
 	@GetMapping("/purchaseorderdetails/add")
 	public String loadAdd(Model model) {
 		model.addAttribute("purchaseorderdetail", new Purchaseorderdetail());
-		model.addAttribute("purchaseorderheaders", purchaseorderheaderService.findAll());
+		model.addAttribute("purchaseorderheaders", bDelegate.purchaseorderheaderFindAll());
 		return "/purchaseorderdetails/add";
 	}
 	
@@ -48,10 +46,10 @@ public class PurchaseorderdetailController implements IPurchaseorderdetailContro
 		if (action.equals("Cancel"))
 			return "redirect:/purchaseorderdetails/";
 		else if (bindingResult.hasErrors()) {
-			model.addAttribute("purchaseorderheaders", purchaseorderheaderService.findAll());
+			model.addAttribute("purchaseorderheaders",bDelegate.purchaseorderheaderFindAll());
 			return "/purchaseorderdetails/add";
 		}else {
-			purchaseorderdetailService.savePurchaseorderdetail(purchaseorderdetail);			
+			bDelegate.purchaseorderdetailSave(purchaseorderdetail);
 			return "redirect:/purchaseorderdetails/";
 		}
 	}
@@ -59,11 +57,11 @@ public class PurchaseorderdetailController implements IPurchaseorderdetailContro
 	@GetMapping("/purchaseorderdetails/edit/{id}")
 	public String loadUpdate(@PathVariable("id")Integer id,Model model) {
 		System.out.println("carga edit");
-		Optional<Purchaseorderdetail> p = purchaseorderdetailService.findById(id);
-		if(p.isEmpty())
+		Purchaseorderdetail p = bDelegate.purchaseorderdetailFindById(id);
+		if(p == null)
 			throw new IllegalArgumentException("Invalid id "+id);
-		model.addAttribute("purchaseorderdetail", p.get());
-		model.addAttribute("purchaseorderheaders", purchaseorderheaderService.findAll());
+		model.addAttribute("purchaseorderdetail", p);
+		model.addAttribute("purchaseorderheaders",bDelegate.purchaseorderheaderFindAll());
 		System.out.println("fin carga edit");
 		return "/purchaseorderdetails/edit";
 	}
@@ -75,10 +73,10 @@ public class PurchaseorderdetailController implements IPurchaseorderdetailContro
 		if(action.equals("Cancel"))
 			return "redirect:/purchaseorderdetails/";
 		else if(bindigResult.hasErrors()) {
-			model.addAttribute("purchaseorderheaders", purchaseorderheaderService.findAll());
+			model.addAttribute("purchaseorderheaders", bDelegate.purchaseorderheaderFindAll());
 			return "purchaseorderdetails/edit";
 		}else {
-			purchaseorderdetailService.savePurchaseorderdetail(purchaseorderdetail);
+			bDelegate.purchaseorderdetailSave(purchaseorderdetail);
 			return "redirect:/purchaseorderdetails/";
 		}
 	}

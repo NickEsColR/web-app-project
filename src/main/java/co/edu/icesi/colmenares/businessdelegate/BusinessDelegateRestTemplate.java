@@ -1,25 +1,43 @@
 package co.edu.icesi.colmenares.businessdelegate;
 
 import java.math.BigDecimal;
+import java.util.HashSet;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import co.edu.icesi.colmenares.model.hr.Employee;
+import co.edu.icesi.colmenares.model.person.Businessentity;
+import co.edu.icesi.colmenares.model.person.Person;
 import co.edu.icesi.colmenares.model.prchasing.Purchaseorderdetail;
 import co.edu.icesi.colmenares.model.prchasing.Purchaseorderheader;
 import co.edu.icesi.colmenares.model.prchasing.Shipmethod;
 import co.edu.icesi.colmenares.model.prchasing.Vendor;
 import co.edu.icesi.colmenares.model.security.UserApp;
 import co.edu.icesi.colmenares.model.security.UserType;
+import lombok.Getter;
+import lombok.Setter;
 
 
 
 @Component
 public class BusinessDelegateRestTemplate {
 
-	public final static String URI = "http://localhost:8080/api/";
+	public final static String URI = "http://localhost:8081/api/";
 	public final static String URI_USER = URI + "users/";
 	public final static String URI_ADMIN = URI + "admin/";
 	public final static String URI_OPERATOR = URI + "operator/";
@@ -27,13 +45,20 @@ public class BusinessDelegateRestTemplate {
 	public final static String URI_SHIPMETHOD = URI + "shipmethods/";
 	public final static String URI_POH = URI + "purchaseorderheaders/";
 	public final static String URI_POD = URI + "purchaseorderdetails/";
+	public final static String URI_BUS = URI + "businessentities/";
+	public final static String URI_PER = URI + "people/";
+	public final static String URI_EMP = URI + "employees/";
 
+	@Getter
+	@Setter
 	private RestTemplate restTemplate;
 
 
 
 	public BusinessDelegateRestTemplate() {
-		restTemplate = new RestTemplate();
+		this.restTemplate = new RestTemplate();
+		
+
 	}
 
 	//User
@@ -59,8 +84,10 @@ public class BusinessDelegateRestTemplate {
 
 	//Vendor
 
-	public Iterable<Vendor> vendorFindAll() {
-		return restTemplate.getForObject(URI_VENDOR, Iterable.class);
+	public List<Vendor> vendorFindAll() {
+		System.out.println(" MY FFFF");
+		
+		return Arrays.asList(restTemplate.getForObject(URI_VENDOR, Vendor[].class));
 	}
 
 	public Vendor vendorFindById(long id) {
@@ -82,6 +109,7 @@ public class BusinessDelegateRestTemplate {
 	public void vendorDelete(long id) {
 		restTemplate.delete(URI_VENDOR+id);
 	}
+	
 
 	//ShipMethod
 
@@ -175,15 +203,28 @@ public class BusinessDelegateRestTemplate {
 		restTemplate.delete(URI_POH+id);
 	}
 
-
-
-	public RestTemplate getRestTemplate() {
-		return restTemplate;
+	//Businessentity
+	
+	public Businessentity  businessentitySave(Businessentity businessentity) {
+		return restTemplate.postForObject(URI_BUS, new HttpEntity<Businessentity>(businessentity), Businessentity.class);
+	}
+	
+	public Iterable<Businessentity> businessentityFindAll() {
+		return restTemplate.getForObject(URI_BUS, Iterable.class);
+	}
+	
+	//Person
+	
+	public Iterable<Person> personFindAll() {
+		return restTemplate.getForObject(URI_PER, Iterable.class);
+	}
+	
+	//Employee
+	
+	public Iterable<Employee> employeeFindAll() {
+		return restTemplate.getForObject(URI_EMP, Iterable.class);
 	}
 
-	public void setRestTemplate(RestTemplate restTemplate) {
-		this.restTemplate = restTemplate;
-	}
 
 
 

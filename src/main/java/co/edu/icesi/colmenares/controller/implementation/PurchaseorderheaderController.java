@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import co.edu.icesi.colmenares.businessdelegate.BusinessDelegateRestTemplate;
 import co.edu.icesi.colmenares.controller.interfaces.IPurchaseorderheaderController;
 import co.edu.icesi.colmenares.model.prchasing.Purchaseorderheader;
 import co.edu.icesi.colmenares.service.IEmployeeService;
@@ -27,25 +28,19 @@ import co.edu.icesi.colmenares.service.IPurchaseorderheaderService;
 public class PurchaseorderheaderController implements IPurchaseorderheaderController {
 
 	@Autowired
-	private IPurchaseorderheaderService purchaseorderheaderService;
-	
-	@Autowired
-	private IEmployeeService employeeService;
-	
-	@Autowired
-	private IPersonService personService;
+	private BusinessDelegateRestTemplate bDelegate;
 	
 	@GetMapping("/purchaseorderheaders")
 	public String loadIndex(Model model) {
-		model.addAttribute("purchaseorderheaders",purchaseorderheaderService.findAll());
+		model.addAttribute("purchaseorderheaders",bDelegate.purchaseorderheaderFindAll());
 		return "/purchaseorderheaders/index";
 	}
 	
 	@GetMapping("/purchaseorderheaders/add")
 	public String loadAdd(Model model) {
 		model.addAttribute("purchaseorderheader", new Purchaseorderheader());
-		model.addAttribute("employees", employeeService.findAll());
-		model.addAttribute("people", personService.findAll());
+		model.addAttribute("employees", bDelegate.employeeFindAll());
+		model.addAttribute("people", bDelegate.personFindAll());
 		return "/purchaseorderheaders/add";
 	}
 	
@@ -56,23 +51,23 @@ public class PurchaseorderheaderController implements IPurchaseorderheaderContro
 		if (action.equals("Cancel"))
 			return "redirect:/purchaseorderheaders/";
 		else if (bindingResult.hasErrors()) {
-			model.addAttribute("employees", employeeService.findAll());
-			model.addAttribute("people", personService.findAll());
+			model.addAttribute("employees", bDelegate.employeeFindAll());
+			model.addAttribute("people", bDelegate.personFindAll());
 			return "/purchaseorderheaders/add";
 		}else {
-			purchaseorderheaderService.savePurchaseorderheader(purchaseorderheader);
+			bDelegate.purchaseorderheaderSave(purchaseorderheader);
 			return "redirect:/purchaseorderheaders/";
 		}
 	}
 	
 	@GetMapping("/purchaseorderheaders/edit/{id}")
 	public String loadUpdate(@PathVariable("id")int id, Model model) {
-		Optional<Purchaseorderheader> p = purchaseorderheaderService.findById(id);
-		if(p.isEmpty())
+		Purchaseorderheader p = bDelegate.purchaseorderheaderFindById(id);
+		if(p == null)
 			throw new IllegalArgumentException("Invalid id "+id);
-		model.addAttribute("purchaseorderheader", p.get());
-		model.addAttribute("employees", employeeService.findAll());
-		model.addAttribute("people", personService.findAll());
+		model.addAttribute("purchaseorderheader", p);
+		model.addAttribute("employees", bDelegate.employeeFindAll());
+		model.addAttribute("people", bDelegate.personFindAll());
 		return "/purchaseorderheaders/edit";
 	}
 	
@@ -83,27 +78,27 @@ public class PurchaseorderheaderController implements IPurchaseorderheaderContro
 		if(action.equals("Cancel"))
 			return "redirect:/purchaseorderheaders/";
 		else if(bindingResult.hasErrors()) {
-			model.addAttribute("employees", employeeService.findAll());
-			model.addAttribute("people", personService.findAll());
+			model.addAttribute("employees", bDelegate.employeeFindAll());
+			model.addAttribute("people", bDelegate.personFindAll());
 			return "/purchaseorderheaders/edit";
 		}else {
-		purchaseorderheaderService.savePurchaseorderheader(purchaseorderheader);
+			bDelegate.purchaseorderheaderSave(purchaseorderheader);
 		return "redirect:/purchaseorderheaders/";
 		}
 	}
 	
 	@GetMapping("/purchaseorderheaders/info/{id}")
 	public String showHeaderInfo(@PathVariable("id")int id,Model model) {
-		Optional<Purchaseorderheader> p = purchaseorderheaderService.findById(id);
-		if(p.isEmpty())
+		Purchaseorderheader p = bDelegate.purchaseorderheaderFindById(id);
+		if(p == null)
 			throw new IllegalArgumentException("Invalid id "+id);
-		model.addAttribute("purchaseorderheader",p.get());
+		model.addAttribute("purchaseorderheader",p);
 		return "/purchaseorderheaders/info";
 	}
 	
 	@GetMapping("/purchaseorderheaders/2+")
 	public String findWithTwoplusPurchaseorderdetails(Model model) {
-		model.addAttribute("purchaseorderheaders",purchaseorderheaderService.findWithTwoplusPurchaseorderdetails());
+		model.addAttribute("purchaseorderheaders",bDelegate.purchaseorderheaderFindWithTwoplusPurchaseorderdetails());
 		return "/purchaseorderheaders/index";
 	}
 	
@@ -119,8 +114,11 @@ public class PurchaseorderheaderController implements IPurchaseorderheaderContro
 		if(action.equals("Cancel"))
 			return "redirect:/purchaseorderheaders/";
 		else {
-			model.addAttribute("purchaseorderheaders", purchaseorderheaderService.findAllWithSumUnitprices(LocalDate.parse(startdate), 
-					LocalDate.parse(enddate)));
+
+			
+			model.addAttribute("purchaseorderheaders", bDelegate.purchaseorderheaderFindAllWithSumUnitprices
+					(LocalDate.parse(startdate), LocalDate.parse(enddate)));
+
 		}
 		return "/purchaseorderheaders/indexwithunitprices";
 	}
