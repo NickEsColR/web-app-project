@@ -11,10 +11,10 @@
 
 	</parent>
 	<groupId>co.edu.icesi.colmenares</groupId>
-	<artifactId>Taller3-colmenares</artifactId>
-	<version>0.0.3</version>
-	<name>Taller3</name>
-	<description>taller 3 CI </description>
+	<artifactId>Taller3-colmenares-Arce</artifactId>
+	<version>0.0.4</version>
+	<name>Taller4yFinal</name>
+	<description>taller 4 CI y proyecto final</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>

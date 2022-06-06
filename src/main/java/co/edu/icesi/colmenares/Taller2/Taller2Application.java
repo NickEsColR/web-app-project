@@ -46,44 +46,44 @@ public class Taller2Application {
 	}
 	
 	
-	@Bean
-	public CommandLineRunner clr(IEmployeeRepository employeeRepository,
-			IPersonRepository personRepository, 
-			IBusinessentityRepository businessentityRepository, IUserAppRepository userAppRepository,IPurchaseorderdetailService podDao,
-			IPurchaseorderheaderService pohDao) {
-		return (args)->{
-			//businessentities
-			Businessentity be = new Businessentity();
-			businessentityRepository.save(be);
-			be = new Businessentity();
-			businessentityRepository.save(be);
-			be = new Businessentity();
-			businessentityRepository.save(be);
-			//Employees
-			Employee e = new Employee();
-			employeeRepository.save(e);
-			e = new Employee();
-			employeeRepository.save(e);
-			e = new Employee();
-			employeeRepository.save(e);
-			//Persons
-			Person p = new Person();
-			personRepository.save(p);
-			p = new Person();
-			personRepository.save(p);
-			p = new Person();
-			personRepository.save(p);
-			//Users
-			UserApp u = new UserApp();
-			u.setType(UserType.admin.toString());
-			u.setUsername("admin");
-			u.setPassword("{noop}admin");
-			userAppRepository.save(u);
-			u = new UserApp();
-			u.setType(UserType.operator.toString());
-			u.setUsername("operator");
-			u.setPassword("{noop}operator");
-			userAppRepository.save(u);
+//	@Bean
+//	public CommandLineRunner clr(IEmployeeRepository employeeRepository,
+//			IPersonRepository personRepository, 
+//			IBusinessentityRepository businessentityRepository, IUserAppRepository userAppRepository,IPurchaseorderdetailService podDao,
+//			IPurchaseorderheaderService pohDao) {
+//		return (args)->{
+//			//businessentities
+//			Businessentity be = new Businessentity();
+//			businessentityRepository.save(be);
+//			be = new Businessentity();
+//			businessentityRepository.save(be);
+//			be = new Businessentity();
+//			businessentityRepository.save(be);
+//			//Employees
+//			Employee e = new Employee();
+//			employeeRepository.save(e);
+//			e = new Employee();
+//			employeeRepository.save(e);
+//			e = new Employee();
+//			employeeRepository.save(e);
+//			//Persons
+//			Person p = new Person();
+//			personRepository.save(p);
+//			p = new Person();
+//			personRepository.save(p);
+//			p = new Person();
+//			personRepository.save(p);
+//			//Users
+//			UserApp u = new UserApp();
+//			u.setType(UserType.admin.toString());
+//			u.setUsername("admin");
+//			u.setPassword("{noop}admin");
+//			userAppRepository.save(u);
+//			u = new UserApp();
+//			u.setType(UserType.operator.toString());
+//			u.setUsername("operator");
+//			u.setPassword("{noop}operator");
+//			userAppRepository.save(u);
 			//advance queries
 //			Purchaseorderheader poh = new Purchaseorderheader();
 //			poh.setPurchaseorderid(1);
@@ -107,8 +107,8 @@ public class Taller2Application {
 //			pl.add(podDao.findById(2).get());
 //			poh.setPurchaseorderdetails(pl);
 //			pohDao.savePurchaseorderheader(poh);
-			
-		};
-	}
+//			
+//		};
+//	}
 
 }
