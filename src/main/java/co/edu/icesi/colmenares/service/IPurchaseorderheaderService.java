@@ -21,5 +21,5 @@ public interface IPurchaseorderheaderService {
 	Iterable<Purchaseorderheader> findAll();
 	Optional<Purchaseorderheader> findById(int id);
 	List<Purchaseorderheader> findWithTwoplusPurchaseorderdetails();
-	List<Object> findAllWithSumUnitprices(LocalDate start, LocalDate end);
+	List<Purchaseorderheader> findAllWithSumUnitprices(LocalDate start, LocalDate end);
 }

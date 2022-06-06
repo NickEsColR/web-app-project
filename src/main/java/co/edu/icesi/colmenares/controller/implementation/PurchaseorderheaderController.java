@@ -1,9 +1,6 @@
 package co.edu.icesi.colmenares.controller.implementation;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -114,12 +111,18 @@ public class PurchaseorderheaderController implements IPurchaseorderheaderContro
 		if(action.equals("Cancel"))
 			return "redirect:/purchaseorderheaders/";
 		else {
+<<<<<<< HEAD
 
 			
 			model.addAttribute("purchaseorderheaders", bDelegate.purchaseorderheaderFindAllWithSumUnitprices
 					(LocalDate.parse(startdate), LocalDate.parse(enddate)));
 
+=======
+			
+			model.addAttribute("purchaseorderheaders", purchaseorderheaderService.findAllWithSumUnitprices
+					(LocalDate.parse(startdate), LocalDate.parse(enddate)));
+>>>>>>> parent of ec63378 (all views working)
 		}
-		return "/purchaseorderheaders/indexwithunitprices";
+		return "/purchaseorderheaders/index";
 	}
 }

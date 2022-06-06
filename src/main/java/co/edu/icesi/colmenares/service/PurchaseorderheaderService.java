@@ -161,12 +161,10 @@ public class PurchaseorderheaderService implements IPurchaseorderheaderService {
 	}
 
 	@Override
-	public List<Object> findAllWithSumUnitprices(LocalDate start, LocalDate end) {
+	public List<Purchaseorderheader> findAllWithSumUnitprices(LocalDate start, LocalDate end) {
 		// TODO Auto-generated method stub
 		return purchaseorderheaderRepository.findAllWithSumUnitprices(start, end);
 	}
-
-
 	
 
 }

@@ -15,7 +15,7 @@ import co.edu.icesi.colmenares.restController.UserRestController;
 import co.edu.icesi.colmenares.restController.VendorRestController;
 
 
-@Component
+//@Component
 public class BusinessDelegateController {
 
 	//User Rest Controller
